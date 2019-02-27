@@ -124,5 +124,11 @@ function addPlayer() {
   div.appendChild(x);
 
   parent.appendChild(div);
+  window.scrollBy(0, 100);
+
+  if(playerCount == 5){
+    var ctrl = document.getElementsByClassName("add-player-control")[0];
+    ctrl.classList.add("no-display");
+  }
 
 }
