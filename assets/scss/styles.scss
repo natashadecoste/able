@@ -43,6 +43,9 @@ $input-shadow: none;
 .no-display {
     display: none;
 }
+.full-width {
+    width: 100%;
+}
 
 ///////////////////////////////////////
 // SENDER CODE
@@ -67,6 +70,11 @@ $input-shadow: none;
     position: fixed;
     bottom: 0;
     width: 100%;
+    .rocketicon {
+        width: auto;
+        height: 1em;
+        padding-left: 0.8em;
+    }
 }
 
 .add-player-control {
