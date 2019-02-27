@@ -11,6 +11,9 @@ var dom = {
   message: doc.getElementById("message")
 };
 
+//state controls
+var playerCount = 1;
+
 
 
 function sessionListener(e) {
@@ -85,3 +88,26 @@ window.onload = function() {
 //   trace('ChromeCast: version=${ChromeCast.VERSION}');
 //   trace('ChromeCast: loaded=$loaded, errorInfo=$errorInfo');
 // });
+
+function addPlayer() {
+  console.log("player count: " + playerCount);
+  playerCount++;
+  var parent = document.getElementById("players-container");
+
+  var div = document.createElement("DIV");
+  div.classList.add("field");
+  var x = document.createElement("INPUT");
+  x.classList.add("input");
+  x.classList.add("is-medium");
+  x.setAttribute("type", "text");
+
+  var player = "p"+playerCount;
+  var playerid = "player-"+playerCount;
+  x.setAttribute("value", player);
+  x.setAttribute("id", playerid);
+
+  div.appendChild(x);
+
+  parent.appendChild(div);
+
+}
