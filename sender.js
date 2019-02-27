@@ -1,4 +1,5 @@
 "use strict";
+
 var global = window;
 var doc = global.document;
 var con = global.console;
@@ -12,7 +13,7 @@ var dom = {
 };
 
 //state controls
-var playerCount = 1;
+var playerCount = 0;
 
 
 
@@ -73,12 +74,16 @@ function stopCasting() {
   castSession.endSession(true);
 }
 
+
 window.onload = function() {
 //   debugger;
 //   window["__onGCastApiAvailable"] = function(isAvailable) {
     
 //     if (isAvailable) {
+      
       initializeCastApi();
+      addPlayer();
+      
 //     }
 //   }
 }
@@ -99,6 +104,7 @@ function addPlayer() {
   var x = document.createElement("INPUT");
   x.classList.add("input");
   x.classList.add("is-medium");
+  x.classList.add("astronaut");
   x.setAttribute("type", "text");
 
   var player = "p"+playerCount;
@@ -106,6 +112,15 @@ function addPlayer() {
   x.setAttribute("value", player);
   x.setAttribute("id", playerid);
 
+  // creating the icon
+  var icon = document.createElement("SPAN");
+  icon.classList.add("astro-icon");
+  var content = "url(./assets/icons/astronaut-helmet.svg)"
+  icon.style.content = content;
+  
+
+
+  div.appendChild(icon);
   div.appendChild(x);
 
   parent.appendChild(div);

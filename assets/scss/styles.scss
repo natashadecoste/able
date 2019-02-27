@@ -48,6 +48,10 @@ $input-shadow: none;
 // SENDER CODE
 ///////////////////////////////////////
 
+.player-section {
+    margin-bottom: 85px;
+}
+
 // styling the credits (for icons/etc)
 .credits {
     font-size: 8px;
@@ -67,6 +71,26 @@ $input-shadow: none;
 
 .add-player-control {
     padding: 1em 0;
+}
+
+.field {
+    position: relative;
+    display: block;
+    padding-left: 2em;
+    input.astronaut {
+        // width: unset;
+        // margin-left: 1.3em;
+        //width: calc(100% - 1.2em);
+    }
+    .astro-icon {
+        position: absolute;
+        left: 0.2em;
+        top: .8em;
+        width: 1.3em;
+        height: 1.3em;
+    }
+    
+
 }
 
 ///////////////////////////////////////
