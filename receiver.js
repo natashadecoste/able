@@ -15,15 +15,16 @@ function init() {
   context = cast.framework.CastReceiverContext.getInstance();
   context.addCustomMessageListener(namespace, showMessage);
 
-
-
-
-
   context.start();
 }
 
 function showMessage(e){
-  dom.message.innerHTML = 'yo';
+  
+  dom.message.innerHTML = e.data.message; // JSON.stringify(e); //.message;
+  
+  var p = moveWithRotate();
+  dom.message.innerHTML += p;
+
 
 }
 

@@ -1,79 +1,80 @@
 <!DOCTYPE html>
 <html>
         <head>
-                <meta name="viewport" content="width=device-width,
-                        initial-scale=1">
-                <meta charset="utf-8">
-                <link rel="stylesheet" href="assets/css/styles.css?<?php echo time(); ?>">
-                <script defer
-                        src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
-                <title>DEMO</title>
+                        <meta name="viewport" content="width=device-width,
+                                initial-scale=1">
+                        <meta charset="utf-8">
+                        <link rel="stylesheet" href="assets/css/styles.css?v=19">
+                        <script defer
+                                src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+                        <title>DEMO</title>
 
-                <script
-                        src="https://www.gstatic.com/cv/js/sender/v1/cast_sender.js?loadCastFramework=1"></script>
-        </head>
-        <body>
-                <section class="hero is-medium is-dark is-bold">
-                        <div class="hero-body">
-                                <h1 class="title">
-                                        ABLE Alley
-                                </h1>
-                                <h4 class="subtitle">
-                                        an extension of the ABLE Project
-                                </h4>
-                                <p class="subtitle">
-                                        <a
-                                                href="https://github.com/ShiyuL/ABLEalley"
-                                                class="button is-primary">Github</a>
-                                        <a class="button">Learn
-                                                More</a>
-                                        <!-- <button class="button is-primary"
-                                                onclick="startSession()">start</button>
-                                        <button class="button"
-                                                onclick="stopCasting()">stop</button> -->
-                                        <script src="sender.js"></script>
-                                </p>
+                        <script
+                                src="https://www.gstatic.com/cv/js/sender/v1/cast_sender.js?loadCastFramework=1"></script>
+                </head>
+                <body>
+                        <section class="hero is-medium is-dark is-bold able-header">
+                                <div class="hero-body">
+                                        <h1 class="title">
+                                                ABLE Alley
+                                        </h1>
+                                        <h4 class="subtitle gameplay--off">
+                                                an extension of the ABLE Project
+                                        </h4>
+                                        <p class="subtitle gameplay--off">
+                                                <a
+                                                        href="https://github.com/ShiyuL/ABLEalley"
+                                                        class="button
+                                                        is-primary">Github</a>
+                                                <a class="button">Learn
+                                                        More</a>
+                                                <script src="js/gameplay.js"></script>
+                                                <script src="sender.js"></script>
+                                        </p>
 
-                        </div>
-                </section>
-                <section class="section player-section">
+                                </div>
+                        </section>
+                        <section class="section player-section gameplay--off">
                                 <h2 class="title"> Player Lobby
-                                        </h2>
-                                        <div class="subtitle">
-                                                add up to 5 players to the game.
-                                        </div>
-                        <div id="players-container" class="container">
+                                </h2>
+                                <div class="subtitle">
+                                        add up to 5 players to the game.
+                                </div>
+                                <div id="players-container" class="container">
+                                </div>
+
 
                         </div>
-
-
-                </div>
-                <div class="container">
+                        <div class="container">
                                 <p class="control add-player-control">
-                                        <button onclick="addPlayer()" class="button is-primary">
+                                        <button onclick="addPlayer()"
+                                                class="button is-primary">
                                                 Add Another Player
                                         </a>
                                 </p>
 
                         </div>
-        </section>
-        <section class="hero is-small is-dark is-bold control-cast">
-                <div class="hero-body">
-                                <button class="button full-width is-primary is-large"
-                                                onclick="startSession()">play
-                                                <img class="rocketicon" src="assets/icons/start-up.svg">
-                                        </button>
-                                        <button class="button no-display"
-                                                onclick="stopCasting()">stop</button>
+                </section>
+                <section class="hero is-small is-dark is-bold control-cast">
+                        <div class="hero-body">
+                                <button id="cast-start"
+                                class="button full-width is-primary
+                                        is-large gameplay--off"
+                                        onclick="startSession()">play
+                                        <img class="rocketicon"
+                                                src="assets/icons/start-up.svg">
+                                </button>
+                                <button id="cast-stop" class="button no-display
+                                        full-width is-primary is-large"
+                                        onclick="stopCasting()">stop</button>
                         </p>
 
                 </div>
         </section>
-        <section class="section no-display">
-                        <svg version="1.1" id="bowling_ball"
-                        class="no-display"
+        <section onclick="sendMessage('testing')" class="section
+                bowling-controls no-display">
+                <svg version="1.1" id="bowling-ball"
                         style="fill:#22e"
-                        onclick="sendMessage('testing')"
                         alt="bowling ball to click"
                         height="87px"
                         width="100px"
@@ -93,11 +94,11 @@
                                 M24.957,23.171c-2.025,0-3.674-1.646-3.674-3.673s1.648-3.669,3.674-3.669
                                 c2.029,0,3.672,1.642,3.672,3.669S26.986,23.171,24.957,23.171z"
                                 />
-        
+
                         </svg>
 
-        </section>
-        
+                </section>
+
                 <div class="credits no-display">
                         Icons made by <a
                                 href="https://www.freepik.com/"
@@ -110,7 +111,14 @@
                                 target="_blank">CC
                                 3.0 BY</a>
 
-                Icons made by <a href="https://www.freepik.com/" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" 			    title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></div>
+                        Icons made by <a href="https://www.freepik.com/"
+                                title="Freepik">Freepik</a> from <a
+                                href="https://www.flaticon.com/"
+                                title="Flaticon">www.flaticon.com</a> is
+                        licensed by <a
+                                href="http://creativecommons.org/licenses/by/3.0/"
+                                title="Creative Commons BY 3.0" target="_blank">CC
+                                3.0 BY</a></div>
 
         </body>
 </html>

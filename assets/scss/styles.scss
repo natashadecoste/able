@@ -1,31 +1,26 @@
-
 @charset "utf-8";
-
 // Import a Google Font
 @import url('https://fonts.googleapis.com/css?family=Nunito:400,700');
-
 // Set your brand colors
 $purple: #8A4D76;
 $pink: #FA7C91;
 $brown: #757763;
 $beige-light: #D0D1CD;
 $beige-lighter: #EFF0EB;
-
 // Update Bulma's global variables
-$family-sans-serif: "Nunito", sans-serif;
+$family-sans-serif: "Nunito",
+sans-serif;
 $grey-dark: $brown;
 $grey-light: $beige-light;
 $primary: $brown;
 $link: $pink;
 $widescreen-enabled: false;
 $fullhd-enabled: false;
-
 // Update some of Bulma's component variables
 $body-background-color: $beige-lighter;
 $control-border-width: 2px;
 $input-border-color: transparent;
 $input-shadow: none;
-
 // Import only what you need from Bulma
 @import "../../node_modules/bulma/sass/utilities/_all.sass";
 @import "../../node_modules/bulma/sass/base/_all.sass";
@@ -37,20 +32,25 @@ $input-shadow: none;
 @import "../../node_modules/bulma/sass/layout/hero.sass";
 @import "../../node_modules/bulma/sass/layout/section.sass";
 
+
 ///////////////////////////////////////
 // GLOBAL CODE
 ///////////////////////////////////////
 .no-display {
     display: none;
 }
+
 .full-width {
     width: 100%;
+}
+
+.gameplay--off {
+    //display: unset;
 }
 
 ///////////////////////////////////////
 // SENDER CODE
 ///////////////////////////////////////
-
 .player-section {
     margin-bottom: 85px;
 }
@@ -63,7 +63,6 @@ $input-shadow: none;
 // styling the bowling ball
 #bowling_ball {
     stroke: 2px solid white;
-
 }
 
 .control-cast {
@@ -85,11 +84,6 @@ $input-shadow: none;
     position: relative;
     display: block;
     padding-left: 2em;
-    input.astronaut {
-        // width: unset;
-        // margin-left: 1.3em;
-        //width: calc(100% - 1.2em);
-    }
     .astro-icon {
         position: absolute;
         left: 0.2em;
@@ -97,8 +91,17 @@ $input-shadow: none;
         width: 1.3em;
         height: 1.3em;
     }
-    
+}
 
+.gameplay--on {
+    .control-cast {
+        top: 0;
+        bottom: unset;
+    }
+    .able-header {
+        // we want a smaller header during the game and we need some control over the parts displaying the player and score
+        font-size: 0.8em;
+    }
 }
 
 ///////////////////////////////////////

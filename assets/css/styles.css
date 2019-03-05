@@ -3886,3 +3886,10 @@ a.navbar-item,
     top: .8em;
     width: 1.3em;
     height: 1.3em; }
+
+.gameplay--on .control-cast {
+  top: 0;
+  bottom: unset; }
+
+.gameplay--on .able-header {
+  font-size: 0.8em; }

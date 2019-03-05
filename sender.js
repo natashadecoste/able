@@ -18,11 +18,10 @@ var playerCount = 0;
 
 
 function sessionListener(e) {
-  con.log('here');
   con.log("New session ID:" + e.sessionId);
   session = e;
-  // session.addUpdateListener(sessionUpdateListener);
-  // session.addMessageListener(namespace, receiverMessage);
+  session.addUpdateListener(sessionUpdateListener);
+  session.addMessageListener(namespace, receiverMessage);
 }
 
 function receiverListener(e) {
@@ -35,12 +34,15 @@ function receiverListener(e) {
 
 function onInitSuccess(e){
   con.log("init success");
+}
 
+function onSessionSuccess(){
+  // init the game settings/button controls
+  gameplayMode(0);
 }
 
 function onError(e){
-  con.log("init error");
-  con.log(e);
+  con.log("init error: " + e);
 }
 
 function initializeCastApi() {
@@ -56,14 +58,17 @@ function startSession(){
   chr.cast.initialize(apiConfig, onInitSuccess, onError);
 
   var castContext = cast.framework.CastContext.getInstance();
+  // var castContext = new cast.framework.CastContext();
   castContext.setOptions({
           receiverApplicationId: '39FBD2DE'
   });
-  castContext.requestSession( onInitSuccess, onError);
-  
+  castContext.requestSession( onSessionSuccess, onError);
+
+  onSessionSuccess();
 }
 
 function sendMessage(message) {
+  console.log('here');
   var castSession = cast.framework.CastContext.getInstance().getCurrentSession();
   castSession.sendMessage(namespace,{"message": message});
 
@@ -72,11 +77,12 @@ function sendMessage(message) {
 function stopCasting() {
   var castSession = cast.framework.CastContext.getInstance().getCurrentSession();
   castSession.endSession(true);
+
+  gameplayMode(10);
 }
 
 
 window.onload = function() {
-//   debugger;
 //   window["__onGCastApiAvailable"] = function(isAvailable) {
     
 //     if (isAvailable) {
@@ -88,14 +94,9 @@ window.onload = function() {
 //   }
 }
 
-// ChromeCast.boot(function(loaded, errorInfo):Void
-// {
-//   trace('ChromeCast: version=${ChromeCast.VERSION}');
-//   trace('ChromeCast: loaded=$loaded, errorInfo=$errorInfo');
-// });
 
 function addPlayer() {
-  console.log("player count: " + playerCount);
+  con.log("player count: " + playerCount);
   playerCount++;
   var parent = document.getElementById("players-container");
 
