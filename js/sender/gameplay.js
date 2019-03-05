@@ -1,7 +1,7 @@
+"use strict";
 var body = document.body;
 
 function gameplayMode(state) {
-
     switch(state){
         case 0:
             // state 0 is init
@@ -15,8 +15,7 @@ function gameplayMode(state) {
 
             // set gameplay on body
 
-            body.classList.add('gameplay--on');
-
+            document.body.classList.add('gameplay--on');
             break; 
         case 10: 
 

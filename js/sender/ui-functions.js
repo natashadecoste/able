@@ -1,3 +1,4 @@
+"use strict";
 // this is for adding and customzing elements on the UI with Javascript 
 
 function addPlayerUI(players) {
@@ -13,7 +14,7 @@ function addPlayerUI(players) {
   x.classList.add("astronaut");
   x.setAttribute("type", "text");
 
-  var player = "p" + playerCount;
+  var player = "player " + playerCount;
   var playerid = "player-" + playerCount;
   x.setAttribute("value", player);
   x.setAttribute("id", playerid);

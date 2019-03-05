@@ -66,7 +66,6 @@ function startSession() {
 }
 
 function sendMessage(message) {
-  console.log("here");
   var castSession = cast.framework.CastContext.getInstance().getCurrentSession();
   castSession.sendMessage(namespace, { message: message });
 }
