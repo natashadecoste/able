@@ -1,3 +1,5 @@
+// this is for adding and customzing elements on the UI with Javascript 
+
 function addPlayerUI(players) {
   con.log("player count: " + players);
   var playerCount = players;
