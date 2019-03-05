@@ -48,6 +48,30 @@ $input-shadow: none;
     //display: unset;
 }
 
+
+///////////////////////////////////////
+// CREDITS PAGE
+///////////////////////////////////////
+
+// from sender page
+.linkto-credits {
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin-right: 8px;
+    text-decoration: underline;
+    opacity: 0.8;
+    font-size: 0.6em;
+}
+.built-with {
+    li:before {
+        //content: "\266b";
+        content: '\2022 ';
+        position:relative;
+        left:-0.5em;
+        font-family: "Nunito", Arial, Helvetica, sans-serif;
+    }
+}
 ///////////////////////////////////////
 // SENDER CODE
 ///////////////////////////////////////
@@ -84,7 +108,7 @@ $input-shadow: none;
     position: relative;
     display: block;
     padding-left: 2em;
-    .astro-icon {
+    .bullet-icon {
         position: absolute;
         left: 0.2em;
         top: .8em;

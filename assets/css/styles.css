@@ -3855,6 +3855,21 @@ a.navbar-item,
 .full-width {
   width: 100%; }
 
+.linkto-credits {
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin-right: 8px;
+  text-decoration: underline;
+  opacity: 0.8;
+  font-size: 0.6em; }
+
+.built-with li:before {
+  content: '\2022 ';
+  position: relative;
+  left: -0.5em;
+  font-family: "Nunito", Arial, Helvetica, sans-serif; }
+
 .player-section {
   margin-bottom: 85px; }
 
@@ -3880,7 +3895,7 @@ a.navbar-item,
   position: relative;
   display: block;
   padding-left: 2em; }
-  .field .astro-icon {
+  .field .bullet-icon {
     position: absolute;
     left: 0.2em;
     top: .8em;

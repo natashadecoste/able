@@ -15,8 +15,6 @@ var dom = {
 //state controls
 var playerCount = 0;
 
-
-
 function sessionListener(e) {
   con.log("New session ID:" + e.sessionId);
   session = e;
@@ -32,46 +30,45 @@ function receiverListener(e) {
   }
 }
 
-function onInitSuccess(e){
+function onInitSuccess(e) {
   con.log("init success");
 }
 
-function onSessionSuccess(){
+function onSessionSuccess() {
   // init the game settings/button controls
   gameplayMode(0);
 }
 
-function onError(e){
+function onError(e) {
   con.log("init error: " + e);
 }
 
 function initializeCastApi() {
   var sessionRequest = new chr.cast.SessionRequest(applicationID);
-    apiConfig = new chr.cast.ApiConfig(
-      sessionRequest,
-      sessionListener,
-      receiverListener
-    );
+  apiConfig = new chr.cast.ApiConfig(
+    sessionRequest,
+    sessionListener,
+    receiverListener
+  );
 }
 
-function startSession(){
+function startSession() {
   chr.cast.initialize(apiConfig, onInitSuccess, onError);
 
   var castContext = cast.framework.CastContext.getInstance();
   // var castContext = new cast.framework.CastContext();
   castContext.setOptions({
-          receiverApplicationId: '39FBD2DE'
+    receiverApplicationId: "39FBD2DE"
   });
-  castContext.requestSession( onSessionSuccess, onError);
+  castContext.requestSession(onSessionSuccess, onError);
 
   onSessionSuccess();
 }
 
 function sendMessage(message) {
-  console.log('here');
+  console.log("here");
   var castSession = cast.framework.CastContext.getInstance().getCurrentSession();
-  castSession.sendMessage(namespace,{"message": message});
-
+  castSession.sendMessage(namespace, { message: message });
 }
 
 function stopCasting() {
@@ -80,56 +77,24 @@ function stopCasting() {
 
   gameplayMode(10);
 }
-
-
-window.onload = function() {
-//   window["__onGCastApiAvailable"] = function(isAvailable) {
-    
-//     if (isAvailable) {
-      
-      initializeCastApi();
-      addPlayer();
-      
-//     }
-//   }
-}
-
-
-function addPlayer() {
-  con.log("player count: " + playerCount);
+function addPlayer(){
   playerCount++;
-  var parent = document.getElementById("players-container");
-
-  var div = document.createElement("DIV");
-  div.classList.add("field");
-  var x = document.createElement("INPUT");
-  x.classList.add("input");
-  x.classList.add("is-medium");
-  x.classList.add("astronaut");
-  x.setAttribute("type", "text");
-
-  var player = "p"+playerCount;
-  var playerid = "player-"+playerCount;
-  x.setAttribute("value", player);
-  x.setAttribute("id", playerid);
-
-  // creating the icon
-  var icon = document.createElement("SPAN");
-  icon.classList.add("astro-icon");
-  var content = "url(./assets/icons/astronaut-helmet.svg)"
-  icon.style.content = content;
-  
-
-
-  div.appendChild(icon);
-  div.appendChild(x);
-
-  parent.appendChild(div);
-  window.scrollBy(0, 100);
-
-  if(playerCount == 5){
-    var ctrl = document.getElementsByClassName("add-player-control")[0];
-    ctrl.classList.add("no-display");
-  }
-
+  addPlayerUI(playerCount);
 }
+window.onload = function() {
+  window["__onGCastApiAvailable"] = function(isAvailable) {
+    if (isAvailable) {
+      initializeCastApi();
+    }
+  };
+  if (
+    /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+    con.log("mobile");
+    initPlayerLobby();
+    initCastControls();
+
+  } else {
+    con.log("Not a mobile device! Game will only work on a mobile, sorry");
+    createAlert("alert-message", "Sorry! Looks like you need a mobile device to play the game!");
+  }
+};

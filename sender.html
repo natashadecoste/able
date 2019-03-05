@@ -11,12 +11,16 @@
 
                         <script
                                 src="https://www.gstatic.com/cv/js/sender/v1/cast_sender.js?loadCastFramework=1"></script>
-                </head>
+                                <script src="js/ui-functions.js"></script>
+                                <script src="js/gameplay.js"></script>
+                                <script src="sender.js"></script>
+                        </head>
                 <body>
                         <section class="hero is-medium is-dark is-bold able-header">
                                 <div class="hero-body">
                                         <h1 class="title">
-                                                ABLE Alley
+                                                <a href="https://vsninc.ca/Capstone/sender.html">ABLE Alley</a>
+
                                         </h1>
                                         <h4 class="subtitle gameplay--off">
                                                 an extension of the ABLE Project
@@ -28,13 +32,13 @@
                                                         is-primary">Github</a>
                                                 <a class="button">Learn
                                                         More</a>
-                                                <script src="js/gameplay.js"></script>
-                                                <script src="sender.js"></script>
-                                        </p>
 
+                                        </p>
+                                        <a href="credits.html" class="linkto-credits">acknowledgments</a>
                                 </div>
                         </section>
-                        <section class="section player-section gameplay--off">
+                        <section id="alert-message"></section>
+                        <section class="section player-section gameplay--off no-display">
                                 <h2 class="title"> Player Lobby
                                 </h2>
                                 <div class="subtitle">
@@ -55,14 +59,14 @@
 
                         </div>
                 </section>
-                <section class="hero is-small is-dark is-bold control-cast">
+                <section class="hero is-small is-dark is-bold control-cast no-display">
                         <div class="hero-body">
                                 <button id="cast-start"
                                 class="button full-width is-primary
                                         is-large gameplay--off"
                                         onclick="startSession()">play
-                                        <img class="rocketicon"
-                                                src="assets/icons/start-up.svg">
+                                        <!-- <img class="rocketicon"
+                                                src="assets/icons/start-up.svg"> -->
                                 </button>
                                 <button id="cast-stop" class="button no-display
                                         full-width is-primary is-large"
@@ -98,27 +102,6 @@
                         </svg>
 
                 </section>
-
-                <div class="credits no-display">
-                        Icons made by <a
-                                href="https://www.freepik.com/"
-                                title="Freepik">Freepik</a> from <a
-                                href="https://www.flaticon.com/"
-                                title="Flaticon">www.flaticon.com</a> is
-                        licensed by <a
-                                href="http://creativecommons.org/licenses/by/3.0/"
-                                title="Creative Commons BY 3.0"
-                                target="_blank">CC
-                                3.0 BY</a>
-
-                        Icons made by <a href="https://www.freepik.com/"
-                                title="Freepik">Freepik</a> from <a
-                                href="https://www.flaticon.com/"
-                                title="Flaticon">www.flaticon.com</a> is
-                        licensed by <a
-                                href="http://creativecommons.org/licenses/by/3.0/"
-                                title="Creative Commons BY 3.0" target="_blank">CC
-                                3.0 BY</a></div>
 
         </body>
 </html>
