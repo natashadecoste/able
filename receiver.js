@@ -14,19 +14,15 @@ var context, player;
 function init() {
   context = cast.framework.CastReceiverContext.getInstance();
   context.addCustomMessageListener(namespace, showMessage);
-
   context.start();
 }
 
 function showMessage(e){
-  
-  dom.message.innerHTML = e.data.message; // JSON.stringify(e); //.message;
-  
+  dom.message.innerHTML = e.data.message; 
   var p = moveWithRotate();
   dom.message.innerHTML += p;
-
 
 }
 
 global.onload = init;
-dom.message.innerHTML = 'changed';
+dom.message.style.opacity = 0.5;

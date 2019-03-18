@@ -30,7 +30,7 @@ function gameplayMode(state) {
             y.classList.add("no-display"); // remove stop button
           
             
-            y = document.getElementsByClassName("bowling-controls")[0];
+            y = document.getElementsByClassName("gameplay-controls")[0];
             y.classList.add("no-display"); // remove bowling ball
 
             // set gameplay on body

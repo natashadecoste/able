@@ -66,13 +66,15 @@ $('document').ready(function () {
         function init() {
             scene = new THREE.Scene();
 
-            initBackground();
+            //initBackground();
             initMesh();
             initCamera();
             initLights();
             initRenderer();
             controls = new THREE.OrbitControls( camera, renderer.domElement );
             document.body.appendChild(renderer.domElement);
+            loadPinsModel();
+
         }
 
         function initBackground() {
