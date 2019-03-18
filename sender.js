@@ -59,14 +59,14 @@ function initializeCastApi() {
 }
 
 function startSession() {
-  // chr.cast.initialize(apiConfig, onInitSuccess, onError);
+  chr.cast.initialize(apiConfig, onInitSuccess, onError);
 
-  // var castContext = cast.framework.CastContext.getInstance();
-  // // var castContext = new cast.framework.CastContext();
-  // castContext.setOptions({
-  //   receiverApplicationId: "39FBD2DE"
-  // });
-  // castContext.requestSession(onSessionSuccess, onError);
+  var castContext = cast.framework.CastContext.getInstance();
+  // var castContext = new cast.framework.CastContext();
+  castContext.setOptions({
+    receiverApplicationId: "39FBD2DE"
+  });
+  castContext.requestSession(onSessionSuccess, onError);
 
   onSessionSuccess();
   // lets just start gameplay mode FOR NOW
