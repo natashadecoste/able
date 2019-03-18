@@ -67,7 +67,7 @@ $input-shadow: none;
 }
 
 ///////////////////////////////////////
-// SENDER CODE
+// SENDER CODE 
 ///////////////////////////////////////
 .player-section {
     margin-bottom: 85px;
@@ -76,11 +76,6 @@ $input-shadow: none;
 // styling the credits (for icons/etc)
 .credits {
     font-size: 8px;
-}
-
-// styling the bowling ball
-#bowling_ball {
-    stroke: 2px solid white;
 }
 
 .control-cast {
@@ -111,7 +106,8 @@ $input-shadow: none;
     }
 }
 
-.game-status-bar, .gameplay-controls, #cast-stop {
+.game-status-bar, #cast-stop,
+.gameplay-controls {
     display: none;
 }
 
@@ -119,7 +115,19 @@ $input-shadow: none;
     padding: 100px 0 200px 0;
     text-align: center;
     height: 100vh;
-    vertical-align: middle;
+    vertical-align: middle; // styling the bowling ball
+    .bowling-ball-wrapper {
+        width: 100%;
+        height: 100%;
+        #bowling-ball {
+            width: 65vw;
+            height: auto;
+            top: 50%;
+            position: absolute;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+    }
 }
 
 .gameplay--on {
@@ -153,10 +161,10 @@ $input-shadow: none;
             font-weight: 200
         }
     }
-    .gameplay-controls, #cast-stop {
+    .gameplay-controls,
+    #cast-stop {
         display: block;
     }
-
 }
 
 ///////////////////////////////////////

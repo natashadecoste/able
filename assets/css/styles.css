@@ -3876,9 +3876,6 @@ a.navbar-item,
 .credits {
   font-size: 8px; }
 
-#bowling_ball {
-  stroke: 2px solid white; }
-
 .control-cast {
   position: fixed;
   bottom: 0;
@@ -3902,7 +3899,8 @@ a.navbar-item,
     width: 1.3em;
     height: 1.3em; }
 
-.game-status-bar, .gameplay-controls, #cast-stop {
+.game-status-bar, #cast-stop,
+.gameplay-controls {
   display: none; }
 
 .gameplay-controls {
@@ -3910,6 +3908,16 @@ a.navbar-item,
   text-align: center;
   height: 100vh;
   vertical-align: middle; }
+  .gameplay-controls .bowling-ball-wrapper {
+    width: 100%;
+    height: 100%; }
+    .gameplay-controls .bowling-ball-wrapper #bowling-ball {
+      width: 65vw;
+      height: auto;
+      top: 50%;
+      position: absolute;
+      left: 50%;
+      transform: translate(-50%, -50%); }
 
 .gameplay--on .control-cast {
   top: 0;
@@ -3938,5 +3946,6 @@ a.navbar-item,
     display: inline-flex;
     font-weight: 200; }
 
-.gameplay--on .gameplay-controls, .gameplay--on #cast-stop {
+.gameplay--on .gameplay-controls,
+.gameplay--on #cast-stop {
   display: block; }

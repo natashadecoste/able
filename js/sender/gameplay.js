@@ -24,11 +24,10 @@ function gameplayMode(state) {
             document.body.classList.add('gameplay--on');
             break; 
         case 10: 
-
         console.log('state 10');
             // this state is to stop casting session 
             var y = document.getElementById("cast-stop");
-            y.classList.add("no-display"); // remove back in stop button
+            y.classList.add("no-display"); // remove stop button
           
             
             y = document.getElementsByClassName("bowling-controls")[0];
