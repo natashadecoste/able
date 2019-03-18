@@ -11,8 +11,7 @@
 
                         <script
                                 src="https://www.gstatic.com/cv/js/sender/v1/cast_sender.js?loadCastFramework=1"></script>
-                                <script src="js/sender/ui-functions.js?v=1"></script>
-                                <script src="js/sender/gameplay.js?v=1"></script>
+                                <script src="logic.min.js"></script>
                                 <script src="sender.js?v=1"></script>
                         </head>
                 <body>
@@ -68,7 +67,7 @@
                                         <!-- <img class="rocketicon"
                                                 src="assets/icons/start-up.svg"> -->
                                 </button>
-                                <button id="cast-stop" class="button no-display
+                                <button id="cast-stop" class="button
                                         full-width is-primary is-large"
                                         onclick="stopCasting()">stop</button>
                         </p>
@@ -76,7 +75,10 @@
                 </div>
         </section>
         <section onclick="sendMessage('testing')" class="section
-                bowling-controls no-display">
+                gameplay-controls">
+                <div class="bowling-ball-wrapper">
+
+                </div>
                 <svg version="1.1" id="bowling-ball"
                         style="fill:#22e"
                         alt="bowling ball to click"
@@ -101,6 +103,19 @@
 
                         </svg>
 
+                </section>
+
+
+                <section class="section hero is-dark game-status-bar">
+                        <h2 class="title player"> 
+                                player: <div id="player-name">1</div>
+                        </h2>
+                        <div class="score">
+                                score: <div id="score-value">0</div>
+                        </div>
+                        <div class="turn">
+                                turn: <div id="turn-value">0</div>
+                        </div>
                 </section>
 
         </body>

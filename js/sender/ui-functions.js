@@ -81,3 +81,10 @@ function createAlert(id, message){
     alertEl.appendChild(div);
     
 }
+
+function setPlayerDisplayName(playerid){
+  var playername = document.getElementById('player-name');
+  if(playername) {
+    playername.innerHTML = playerid;
+  }
+}

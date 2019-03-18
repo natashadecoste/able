@@ -3902,9 +3902,41 @@ a.navbar-item,
     width: 1.3em;
     height: 1.3em; }
 
+.game-status-bar, .gameplay-controls, #cast-stop {
+  display: none; }
+
+.gameplay-controls {
+  padding: 100px 0 200px 0;
+  text-align: center;
+  height: 100vh;
+  vertical-align: middle; }
+
 .gameplay--on .control-cast {
   top: 0;
   bottom: unset; }
 
 .gameplay--on .able-header {
-  font-size: 0.8em; }
+  font-size: 0.8em;
+  display: none; }
+
+.gameplay--on .gameplay--off {
+  display: none; }
+
+.gameplay--on section.game-status-bar {
+  display: block;
+  bottom: 0;
+  position: absolute;
+  width: 100%; }
+  .gameplay--on section.game-status-bar .player,
+  .gameplay--on section.game-status-bar .score,
+  .gameplay--on section.game-status-bar .turn {
+    display: block;
+    font-weight: 600; }
+  .gameplay--on section.game-status-bar #score-value,
+  .gameplay--on section.game-status-bar #player-name,
+  .gameplay--on section.game-status-bar #turn-value {
+    display: inline-flex;
+    font-weight: 200; }
+
+.gameplay--on .gameplay-controls, .gameplay--on #cast-stop {
+  display: block; }

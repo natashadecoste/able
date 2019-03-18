@@ -12,8 +12,13 @@ var dom = {
   message: doc.getElementById("message")
 };
 
-//state controls
-var playerCount = 0;
+///////////////////////////////////////////////////////////////////////////////////////////////
+// SENDER should only be responsible for handing the casting session and messaging between   //
+// sender and receiver                                                                       //
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+//state controls to pass to the gameplay engine
+var playerCount = 1;
 
 function sessionListener(e) {
   con.log("New session ID:" + e.sessionId);
@@ -36,7 +41,8 @@ function onInitSuccess(e) {
 
 function onSessionSuccess() {
   // init the game settings/button controls
-  gameplayMode(0);
+  initializeGame(playerCount);
+
 }
 
 function onError(e) {
@@ -53,16 +59,18 @@ function initializeCastApi() {
 }
 
 function startSession() {
-  chr.cast.initialize(apiConfig, onInitSuccess, onError);
+  // chr.cast.initialize(apiConfig, onInitSuccess, onError);
 
-  var castContext = cast.framework.CastContext.getInstance();
-  // var castContext = new cast.framework.CastContext();
-  castContext.setOptions({
-    receiverApplicationId: "39FBD2DE"
-  });
-  castContext.requestSession(onSessionSuccess, onError);
+  // var castContext = cast.framework.CastContext.getInstance();
+  // // var castContext = new cast.framework.CastContext();
+  // castContext.setOptions({
+  //   receiverApplicationId: "39FBD2DE"
+  // });
+  // castContext.requestSession(onSessionSuccess, onError);
 
   onSessionSuccess();
+  // lets just start gameplay mode FOR NOW
+
 }
 
 function sendMessage(message) {

@@ -31,8 +31,6 @@ $input-shadow: none;
 @import "../../node_modules/bulma/sass/components/navbar.sass";
 @import "../../node_modules/bulma/sass/layout/hero.sass";
 @import "../../node_modules/bulma/sass/layout/section.sass";
-
-
 ///////////////////////////////////////
 // GLOBAL CODE
 ///////////////////////////////////////
@@ -44,15 +42,9 @@ $input-shadow: none;
     width: 100%;
 }
 
-.gameplay--off {
-    //display: unset;
-}
-
-
 ///////////////////////////////////////
 // CREDITS PAGE
 ///////////////////////////////////////
-
 // from sender page
 .linkto-credits {
     position: absolute;
@@ -63,15 +55,17 @@ $input-shadow: none;
     opacity: 0.8;
     font-size: 0.6em;
 }
+
 .built-with {
     li:before {
         //content: "\266b";
         content: '\2022 ';
-        position:relative;
-        left:-0.5em;
+        position: relative;
+        left: -0.5em;
         font-family: "Nunito", Arial, Helvetica, sans-serif;
     }
 }
+
 ///////////////////////////////////////
 // SENDER CODE
 ///////////////////////////////////////
@@ -117,6 +111,17 @@ $input-shadow: none;
     }
 }
 
+.game-status-bar, .gameplay-controls, #cast-stop {
+    display: none;
+}
+
+.gameplay-controls {
+    padding: 100px 0 200px 0;
+    text-align: center;
+    height: 100vh;
+    vertical-align: middle;
+}
+
 .gameplay--on {
     .control-cast {
         top: 0;
@@ -125,7 +130,33 @@ $input-shadow: none;
     .able-header {
         // we want a smaller header during the game and we need some control over the parts displaying the player and score
         font-size: 0.8em;
+        display: none;
     }
+    .gameplay--off {
+        display: none;
+    }
+    section.game-status-bar {
+        display: block;
+        bottom: 0;
+        position: absolute;
+        width: 100%;
+        .player,
+        .score,
+        .turn {
+            display: block;
+            font-weight: 600;
+        }
+        #score-value,
+        #player-name,
+        #turn-value {
+            display: inline-flex;
+            font-weight: 200
+        }
+    }
+    .gameplay-controls, #cast-stop {
+        display: block;
+    }
+
 }
 
 ///////////////////////////////////////

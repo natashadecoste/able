@@ -66,7 +66,7 @@ $('document').ready(function () {
         function init() {
             scene = new THREE.Scene();
 
-            //initBackground();
+            initBackground();
             initMesh();
             initCamera();
             initLights();

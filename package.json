@@ -6,7 +6,10 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "scss": "node-sass --watch assets/scss -o assets/css",
-    "scrub": "rm -rf node_modules && npm install"
+    "scrub": "rm -rf node_modules && npm install",
+    "serve": "npm run compile && http-server",
+    "compile": "uglifyjs js/sender/*.js --output logic.min.js",
+    "start": "node-sass assets/scss -o assets/css && npm run serve"
   },
   "keywords": [
     "cast"
@@ -16,5 +19,8 @@
   "devDependencies": {
     "bulma": "^0.7.2",
     "node-sass": "^4.9.2"
+  },
+  "dependencies": {
+    "uglify-js": "^3.4.9"
   }
 }
