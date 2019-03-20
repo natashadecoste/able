@@ -111,8 +111,10 @@ function createLaneBase(width, length, thickness) {
     var gutterSize = 20;
 
     var floorTexture = new THREE.TextureLoader().load('textures/floor.png');
-    var floorMaterial = new THREE.MeshPhysicalMaterial({
-        map: floorTexture,
+    //MeshPhysicalMaterial
+    var floorMaterial = new THREE.MeshBasicMaterial({
+        //map:floorTexture,
+        color: 0x212428,
         clearCoat: 1.0
     });
 
