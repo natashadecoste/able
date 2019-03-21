@@ -4,6 +4,53 @@ var camera, renderer, controls, loader;
 var WIDTH  = window.innerWidth;
 var HEIGHT = window.innerHeight;
 
+    function createBowlingBall() {
+        //var ballMaterial = new THREE.MeshPhongMaterial({color: 0xff3333});
+        var ballMaterial = new THREE.MeshBasicMaterial({color: 0xff3333});
+        var ballGeometry = new THREE.SphereGeometry(5, 32, 32);
+
+        var subMaterial = new THREE.MeshBasicMaterial({color: 0x000000});
+        var cylinderSubtract = new THREE.CylinderGeometry(1, 1, 10, 32);
+        var hole1 = new THREE.Mesh(cylinderSubtract, subMaterial);
+        hole1.position.set(2, 6, 2);
+        var hole2 = new THREE.Mesh(cylinderSubtract, subMaterial);
+        hole2.position.set(2, 6, -2);
+        var hole3 = new THREE.Mesh(cylinderSubtract, subMaterial);
+        hole3.position.set(-2, 6, 0);
+
+        var result = new ThreeBSP(new THREE.Mesh(ballGeometry, subMaterial));
+        result = result.subtract(new ThreeBSP(hole1));
+        result = result.subtract(new ThreeBSP(hole2));
+        result = result.subtract(new ThreeBSP(hole3)).toMesh();
+
+        var ball = new Physijs.ConvexMesh(result.geometry, ballMaterial, 15);
+        ball.rotation.z = Math.PI / 16;
+        ball.name = "ball";
+        ball.castShadow = true;
+
+        return ball;
+    }
+        function initMesh() {
+
+            // ball
+            mesh = createBowlingBall();
+            // loader = new THREE.GLTFLoader();
+            // loader.load( 'assets/models/ball.gltf', function ( gltf ) {
+            //   mesh = gltf.scene;
+            //   mesh.traverse( function ( child ) {
+            //     if ( child.isMesh ) {
+            //       child.geometry.center();//in order to make rotation work
+            //     }
+            //   });
+            //   mesh.scale.set(20,20,20);
+            //   mesh.position.set(-100, 20, 0);
+            //   scene.add( mesh );
+            // });
+              //mesh.scale.set(20,20,20);
+            mesh.position.set(-100, 20, 0);
+            scene.add( mesh );
+
+        }
         function onDocumentMouseDown(event) {
             switch ( event.button ) {
                 case 0: // left click to trigger movement
@@ -117,27 +164,7 @@ $('document').ready(function () {
         }
 
         
-        function initMesh() {
 
-            // ball
-            mesh = createBowlingBall();
-            // loader = new THREE.GLTFLoader();
-            // loader.load( 'assets/models/ball.gltf', function ( gltf ) {
-            //   mesh = gltf.scene;
-            //   mesh.traverse( function ( child ) {
-            //     if ( child.isMesh ) {
-            //       child.geometry.center();//in order to make rotation work
-            //     }
-            //   });
-            //   mesh.scale.set(20,20,20);
-            //   mesh.position.set(-100, 20, 0);
-            //   scene.add( mesh );
-            // });
-              //mesh.scale.set(20,20,20);
-            mesh.position.set(-100, 20, 0);
-            scene.add( mesh );
-
-        }
 
         function render() {
             scene.simulate();
@@ -150,32 +177,7 @@ $('document').ready(function () {
 
 
 
-    function createBowlingBall() {
-        //var ballMaterial = new THREE.MeshPhongMaterial({color: 0xff3333});
-        var ballMaterial = new THREE.MeshBasicMaterial({color: 0xff3333});
-        var ballGeometry = new THREE.SphereGeometry(5, 32, 32);
 
-        var subMaterial = new THREE.MeshBasicMaterial({color: 0x000000});
-        var cylinderSubtract = new THREE.CylinderGeometry(1, 1, 10, 32);
-        var hole1 = new THREE.Mesh(cylinderSubtract, subMaterial);
-        hole1.position.set(2, 6, 2);
-        var hole2 = new THREE.Mesh(cylinderSubtract, subMaterial);
-        hole2.position.set(2, 6, -2);
-        var hole3 = new THREE.Mesh(cylinderSubtract, subMaterial);
-        hole3.position.set(-2, 6, 0);
-
-        var result = new ThreeBSP(new THREE.Mesh(ballGeometry, subMaterial));
-        result = result.subtract(new ThreeBSP(hole1));
-        result = result.subtract(new ThreeBSP(hole2));
-        result = result.subtract(new ThreeBSP(hole3)).toMesh();
-
-        var ball = new Physijs.ConvexMesh(result.geometry, ballMaterial, 15);
-        ball.rotation.z = Math.PI / 16;
-        ball.name = "ball";
-        ball.castShadow = true;
-
-        return ball;
-    }
 
 
         init();
