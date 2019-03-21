@@ -1,8 +1,66 @@
 var scene;
+var mesh = null;
+var camera, renderer, controls, loader;
+var WIDTH  = window.innerWidth;
+var HEIGHT = window.innerHeight;
+
+        function onDocumentMouseDown(event) {
+            switch ( event.button ) {
+                case 0: // left click to trigger movement
+                    moveWithRotate();
+                    break;
+                case 1: // middle
+                    break;
+                case 2: // right click to reset ball position
+                    for (var i in scene._objects) {
+                        if (scene._objects[i].name === "ball") {
+                            scene.remove(scene._objects[i]);
+                        }
+                    }
+                    initMesh();
+                    resetPins();
+                    break;
+            }
+
+        }
+        function moveWithRotate() {
+            mesh.setLinearVelocity(new THREE.Vector3(200, 0, 0 ));
+            // if (mesh.position.x < 700) {
+            //     requestAnimationFrame(moveWithRotate);
+            //     renderer.render(scene, camera);
+            //
+            //     var direction = new THREE.Vector3( 1, 0, 0 );
+            //
+            //     // scalar to simulate speed
+            //     var speed = 5;
+            //
+            //     var vector = direction.multiplyScalar( speed, speed, speed );
+            //     mesh.position.x += vector.x;
+            //     mesh.position.y += vector.y;
+            //     mesh.position.z += vector.z;
+            //     rotateAboutPoint(mesh, new THREE.Vector3(mesh.position.x, mesh.position.y, mesh.position.z),new THREE.Vector3(0,0,1),-0.1, true);
+            // }
+        }
+
+    function rotateAboutPoint(obj, point, axis, theta, pointIsWorld){
+        pointIsWorld = (pointIsWorld === undefined)? false : pointIsWorld;
+
+        if(pointIsWorld){
+            obj.parent.localToWorld(obj.position); // compensate for world coordinate
+        }
+
+        obj.position.sub(point); // remove the offset
+        obj.position.applyAxisAngle(axis, theta); // rotate the POSITION
+        obj.position.add(point); // re-add the offset
+
+        if(pointIsWorld){
+            obj.parent.worldToLocal(obj.position); // undo world coordinates compensation
+        }
+
+        obj.rotateOnAxis(axis, theta); // rotate the OBJECT
+    }
 $('document').ready(function () {
-        var camera, renderer, controls, loader;
-        var WIDTH  = window.innerWidth;
-        var HEIGHT = window.innerHeight;
+
 
         function init() {
             Physijs.scripts.worker = 'assets/scripts/physijs_worker.js';
@@ -58,7 +116,7 @@ $('document').ready(function () {
             scene.add(backLight);
         }
 
-        var mesh = null;
+        
         function initMesh() {
 
             // ball
@@ -88,62 +146,9 @@ $('document').ready(function () {
             renderer.render(scene, camera);
         }
 
-        function onDocumentMouseDown(event) {
-            switch ( event.button ) {
-                case 0: // left click to trigger movement
-                    moveWithRotate();
-                    break;
-                case 1: // middle
-                    break;
-                case 2: // right click to reset ball position
-                    for (var i in scene._objects) {
-                        if (scene._objects[i].name === "ball") {
-                            scene.remove(scene._objects[i]);
-                        }
-                    }
-                    initMesh();
-                    resetPins();
-                    break;
-            }
 
-        }
 
-        function moveWithRotate() {
-            mesh.setLinearVelocity(new THREE.Vector3(200, 0, 0 ));
-            // if (mesh.position.x < 700) {
-            //     requestAnimationFrame(moveWithRotate);
-            //     renderer.render(scene, camera);
-            //
-            //     var direction = new THREE.Vector3( 1, 0, 0 );
-            //
-            //     // scalar to simulate speed
-            //     var speed = 5;
-            //
-            //     var vector = direction.multiplyScalar( speed, speed, speed );
-            //     mesh.position.x += vector.x;
-            //     mesh.position.y += vector.y;
-            //     mesh.position.z += vector.z;
-            //     rotateAboutPoint(mesh, new THREE.Vector3(mesh.position.x, mesh.position.y, mesh.position.z),new THREE.Vector3(0,0,1),-0.1, true);
-            // }
-        }
 
-    function rotateAboutPoint(obj, point, axis, theta, pointIsWorld){
-        pointIsWorld = (pointIsWorld === undefined)? false : pointIsWorld;
-
-        if(pointIsWorld){
-            obj.parent.localToWorld(obj.position); // compensate for world coordinate
-        }
-
-        obj.position.sub(point); // remove the offset
-        obj.position.applyAxisAngle(axis, theta); // rotate the POSITION
-        obj.position.add(point); // re-add the offset
-
-        if(pointIsWorld){
-            obj.parent.worldToLocal(obj.position); // undo world coordinates compensation
-        }
-
-        obj.rotateOnAxis(axis, theta); // rotate the OBJECT
-    }
 
     function createBowlingBall() {
         //var ballMaterial = new THREE.MeshPhongMaterial({color: 0xff3333});
