@@ -146,7 +146,8 @@ $('document').ready(function () {
     }
 
     function createBowlingBall() {
-        var ballMaterial = new THREE.MeshPhongMaterial({color: 0xff3333});
+        //var ballMaterial = new THREE.MeshPhongMaterial({color: 0xff3333});
+        var ballMaterial = new THREE.MeshBasicMaterial({color: 0xff3333});
         var ballGeometry = new THREE.SphereGeometry(5, 32, 32);
 
         var subMaterial = new THREE.MeshBasicMaterial({color: 0x000000});
