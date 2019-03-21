@@ -3,6 +3,7 @@ var cross1;
 var cross2;
 var laneText, roundText;
 
+
 function createBowlingAlly(width, length, height) {
     var laneLength = 600;
     var backLength = length - laneLength;
@@ -21,6 +22,7 @@ function createBowlingAlly(width, length, height) {
     createLaneNumbers();
     return enclosing;
 }
+
 
 function addLanes(parent, width, length, height, laneLength, laneWidth, guardHeight, laneAmount) {
     var thickness = 1;
@@ -54,13 +56,14 @@ function addLanes(parent, width, length, height, laneLength, laneWidth, guardHei
     for (var spaceNum = 0; spaceNum < spacersAmount; spaceNum++) {
         var space = new Physijs.BoxMesh(sideGeometry, sideMaterial, 0);
         space.position.set(length / 2 - laneLength / 2, guardHeight, (-width / 2) + spaceNum * (laneWidth + laneSeparation));
-        parent.add(space);
+       // parent.add(space);
 
         var column = new Physijs.BoxMesh(columnGeometry, columnMaterial, 0);
         column.position.set(length / 2, height / 2, (-width / 2) + spaceNum * (laneWidth + laneSeparation));
-        parent.add(column);
+        //parent.add(column);
     }
 }
+
 
 function createBowlingLane(width, length, guardHeight, gutterAndRailThickness) {
     var collectionBoxHeight = 200;
@@ -78,7 +81,7 @@ function createBowlingLane(width, length, guardHeight, gutterAndRailThickness) {
 
     var collectionBox = createCollectionBox(width, collectionBoxDepth, collectionBoxHeight);
     collectionBox.position.set(collectionBoxDepth / 2 + length / 2, -25, 0);
-    laneFloor.add(collectionBox);
+    //laneFloor.add(collectionBox);
 
     var middleLight = new THREE.SpotLight(0xffffff, 0.5, collectionBoxHeight * 2, Math.PI, 1);
     middleLight.position.set(0, collectionBoxHeight / 2, 0);
@@ -110,7 +113,7 @@ function createBowlingLane(width, length, guardHeight, gutterAndRailThickness) {
 function createLaneBase(width, length, thickness) {
     var gutterSize = 20;
 
-    var floorTexture = new THREE.TextureLoader().load('textures/floor.png');
+    //var floorTexture = new THREE.TextureLoader().load('textures/floor.png');
     //MeshPhysicalMaterial
     var floorMaterial = new THREE.MeshBasicMaterial({
         //map:floorTexture,
@@ -125,12 +128,12 @@ function createLaneBase(width, length, thickness) {
 
     gutterLeft.position.z = -(width / 2 - gutterSize / 2);
     gutterLeft.receiveShadow = true;
-    floor.add(gutterLeft);
+    //floor.add(gutterLeft);
 
     var gutterRight = createGutter(length, gutterSize, thickness);
     gutterRight.position.z = (width / 2 - gutterSize / 2);
     gutterRight.receiveShadow = true;
-    floor.add(gutterRight);
+   // floor.add(gutterRight);
 
     return floor;
 }
@@ -178,7 +181,7 @@ function createGuardRail(guardHeight, guardLength, thickness) {
     for (var standNum = 0; standNum < standAmount; standNum++) {
         var stand = new Physijs.BoxMesh(guardStandGeometry, guardMaterial, 0);
         stand.position.set(-guardLength / 2 + thickness / 2 + standNum * guardLength / standAmount, -guardHeight / 2, 0);
-        bar.add(stand)
+       //bar.add(stand)
     }
 
     return bar;
@@ -212,15 +215,15 @@ function createCollectionBox(width, depth, height) {
 
     var boxBack = new Physijs.BoxMesh(new THREE.BoxGeometry(1, height, width), collectBoxMaterial, 0);
     boxBack.position.set(depth / 2, height / 2, 0);
-    boxBottom.add(boxBack);
+    //boxBottom.add(boxBack);
 
     var boxLeft = new Physijs.BoxMesh(new THREE.BoxGeometry(depth, height, 1), collectBoxMaterial, 0);
     boxLeft.position.set(0, height / 2, -width / 2 + 0.5);
-    boxBottom.add(boxLeft);
+    //boxBottom.add(boxLeft);
 
     var boxRight = new Physijs.BoxMesh(new THREE.BoxGeometry(depth, height, 1), collectBoxMaterial, 0);
     boxRight.position.set(0, height / 2, width / 2 - 0.5);
-    boxBottom.add(boxRight);
+    //boxBottom.add(boxRight);
     return boxBottom;
 }
 
@@ -243,31 +246,31 @@ function createEnclosing(width, length, height) {
     var topGeometry = new THREE.BoxGeometry(length, 0.25, width);
     var top = new Physijs.BoxMesh(topGeometry, topMaterial, 0);
     top.position.y = height;
-    base.add(top);
+   // base.add(top);
 
     var wallTexture = new THREE.TextureLoader().load("textures/wall10.jpg");
     var sideWallMaterial = new THREE.MeshLambertMaterial({map: wallTexture});
 
     var leftWall = new Physijs.BoxMesh(new THREE.BoxGeometry(length, height, 1), sideWallMaterial);
     leftWall.position.set(0, -height / 2, -width / 2);
-    top.add(leftWall);
+  //  top.add(leftWall);
 
     var rightWall = new Physijs.BoxMesh(new THREE.BoxGeometry(length, height, 1), sideWallMaterial);
     rightWall.position.set(0, -height / 2, width / 2);
-    top.add(rightWall);
+  //  top.add(rightWall);
 
     var frontPanelTexture = new THREE.TextureLoader().load("textures/109.jpg");
     var frontPanelMaterial = new THREE.MeshBasicMaterial({map: frontPanelTexture});
     var frontPanel = new THREE.Mesh(new THREE.BoxGeometry(1, frontPanelHeight, width), frontPanelMaterial);
     frontPanel.position.set(length / 2 - frontPanelDisplacement, -height + frontPanelHeightFromBase + frontPanelHeight / 2, 0);
-    top.add(frontPanel);
+   // top.add(frontPanel);
 
     var frontUpperPanelTexture = new THREE.TextureLoader().load("textures/space.jpg");
     var frontUpperPanelMaterial = new THREE.MeshBasicMaterial({map: frontUpperPanelTexture});
     var frontUpperPanel = new THREE.Mesh(new THREE.BoxGeometry(1, 300, width), frontUpperPanelMaterial);
     frontUpperPanel.position.set(length / 2 - frontPanelDisplacement - 100, -50, 0);
     frontUpperPanel.rotation.z = Math.PI / 3;
-    top.add(frontUpperPanel);
+   // top.add(frontUpperPanel);
 
     return base;
 }
@@ -316,7 +319,7 @@ function createTV() {
     var movieScreen = new THREE.Mesh(movieGeometry, movieMaterial);
     movieScreen.position.set(x - 1, y, 0);
     movieScreen.rotation.y = (-Math.PI / 2);
-    scene.add(movieScreen);
+   // scene.add(movieScreen);
 }
 
 function createLaneNumbers() {
@@ -344,7 +347,7 @@ function createLaneNumbers() {
             text = new THREE.Mesh(textShape, matLite);
             text.rotation.y = (-Math.PI / 2);
             text.position.set(1000 / 2 - 3, 30, (-1000 / 2) - 3 + (laneNum - 1) * (115 + 28));
-            scene.add(text);
+           // scene.add(text);
         }
     });
 }
