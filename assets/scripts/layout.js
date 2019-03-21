@@ -192,8 +192,9 @@ function createBack(width, length) {
     floorTexture.wrapS = floorTexture.wrapT = THREE.RepeatWrapping;
     floorTexture.repeat.set(1, 5);
 
-    var floorMaterial = new THREE.MeshPhysicalMaterial({
-        map: floorTexture,
+    //THREE.MeshPhysicalMaterial
+    var floorMaterial = new THREE.MeshBasicMaterial({
+       // map: floorTexture,
         side: THREE.FrontSide,
         transparent: false,
         clearCoat: 1.0
