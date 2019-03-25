@@ -9,7 +9,7 @@ function createBowlingAlly(width, length, height) {
     var backLength = length - laneLength;
     var laneWidth = 115;
     var guardHeight = 10;
-    var laneAmount = 7;
+    var laneAmount = 1;//7
 
     var enclosing = createEnclosing(width, length, height);
 

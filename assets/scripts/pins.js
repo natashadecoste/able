@@ -40,13 +40,13 @@ function loadPinsModel() {
             var laneSeparation = (width - (laneWidth * laneAmount)) / laneAmount;
 
             //create pins in other lanes for looks
-            for (var laneNum = 0; laneNum < laneAmount; laneNum++) {
-                if (laneNum !== 3) {
-                    var pins = createPins(geometry, materialsL);
-                    pins.position.set(475, 10, (-width / 2 + laneSeparation / 2 + laneWidth / 2) + laneNum * (laneWidth + laneSeparation));
-                    scene.add(pins);
-                }
-            }
+            // for (var laneNum = 0; laneNum < laneAmount; laneNum++) {
+            //     if (laneNum !== 3) {
+            //         var pins = createPins(geometry, materialsL);
+            //         pins.position.set(475, 10, (-width / 2 + laneSeparation / 2 + laneWidth / 2) + laneNum * (laneWidth + laneSeparation));
+            //         scene.add(pins);
+            //     }
+            // }
         });
     });
 }
