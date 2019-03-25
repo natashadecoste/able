@@ -1,5 +1,5 @@
 "use strict";
-// this is for adding and customzing elements on the UI with Javascript 
+
 
 function addPlayerUI(players) {
   con.log("player count: " + players);
@@ -61,7 +61,7 @@ function initPlayerLobby() {
   lobby.classList.remove("no-display");
 
   // add a player to UI
-  addPlayerUI(0);
+  addPlayerUI(1);
 }
 
 function initCastControls(){
@@ -87,4 +87,28 @@ function setPlayerDisplayName(playerid){
   if(playername) {
     playername.innerHTML = playerid;
   }
+}
+
+function setTurnDisplay(turn){
+  document.getElementById('turn-value').innerHTML = turn+1;
+}
+
+
+function resetPinsModal(){
+  loadingModal.classList.add('is-active');
+
+  setTimeout(function(){
+    changeModalText('resetting bowling pins...');
+    setTimeout(toggleOffModal, 1800);
+  }, 800 );
+}
+
+function toggleOffModal(){
+  console.log("time to toggle off the modal");
+  loadingModal.classList.remove('is-active');
+}
+
+function changeModalText(newText){
+  lodaingModalText.innerHTML = newText;
+
 }

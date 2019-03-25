@@ -40,8 +40,9 @@ function onInitSuccess(e) {
 }
 
 function onSessionSuccess() {
+  var playersArr = getPlayers();
   // init the game settings/button controls
-  initializeGame(playerCount);
+  initializeGame(playersArr);
 
 }
 
@@ -59,30 +60,47 @@ function initializeCastApi() {
 }
 
 function startSession() {
-  chr.cast.initialize(apiConfig, onInitSuccess, onError);
+  try {
+    chr.cast.initialize(apiConfig, onInitSuccess, onError);
 
-  var castContext = cast.framework.CastContext.getInstance();
-  // var castContext = new cast.framework.CastContext();
-  castContext.setOptions({
-    receiverApplicationId: "39FBD2DE"
-  });
-  castContext.requestSession(onSessionSuccess, onError);
+    var castContext = cast.framework.CastContext.getInstance();
+    //var castContext = new cast.framework.CastContext();
+    castContext.setOptions({
+      receiverApplicationId: "39FBD2DE"
+    });
+    castContext.requestSession(onSessionSuccess, onError);
 
-  onSessionSuccess();
-  // lets just start gameplay mode FOR NOW
+    onSessionSuccess();
+  }
+  catch (err){
+    console.log("error: " + err);
+  }
 
 }
 
 function sendMessage(message) {
   var castSession = cast.framework.CastContext.getInstance().getCurrentSession();
   castSession.sendMessage(namespace, { message: message });
+
+  //now we also want to change the turn
+  changeTurn();
 }
 
 function stopCasting() {
-  var castSession = cast.framework.CastContext.getInstance().getCurrentSession();
-  castSession.endSession(true);
+  try {
+    var castSession = cast.framework.CastContext.getInstance().getCurrentSession();
+    castSession.endSession(true);
+  
+    gameplayMode(10);
 
-  gameplayMode(10);
+
+
+  }  catch (err){
+    console.log("error: " + err);
+  }
+
+  location.reload();
+ 
 }
 function addPlayer(){
   playerCount++;
@@ -94,14 +112,26 @@ window.onload = function() {
       initializeCastApi();
     }
   };
-  if (
-    /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+  if ( true ) {
+  //   /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
     con.log("mobile");
     initPlayerLobby();
     initCastControls();
 
   } else {
     con.log("Not a mobile device! Game will only work on a mobile, sorry");
-    createAlert("alert-message", "Sorry! Looks like you need a mobile device to play the game!");
+    createAlert("alert-message", "Sorry! You need a mobile device to play the game!");
   }
 };
+
+function getPlayers(){
+  var form = document.getElementById('players-container');
+  var n  = form.childElementCount;
+  var playersNames = [];
+
+  for(var i = 0; i< n; i++){
+    playersNames.push({name: form.children[i].children[1].value, score: 0})
+  }
+
+  return playersNames;
+}

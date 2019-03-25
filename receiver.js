@@ -19,8 +19,14 @@ function init() {
 
 function showMessage(e){
   dom.message.innerHTML = e.data.message; 
-  var p = moveWithRotate();
-  dom.message.innerHTML += p;
+  //moveWithRotate();
+  setTimeout(function(){
+    moveWithRotate();
+    setTimeout(resetPins(), 1300);
+  }, 0 );
+
+
+  //dom.message.innerHTML += p;
 
 }
 

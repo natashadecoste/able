@@ -1,19 +1,65 @@
-"use strict";
-var body = document.body;
-var players = 0;
-var turn = null;
 
-function initializeGame(playerCount){
-    players = playerCount;
-    turn = 1; // lets not count from 0 for it is too annoying!
-    console.log("starting game, there are " + players + " players");
+"use strict";
+
+
+var body = document.body;
+var players = [];
+var frames = 10; // each player bowls 10 frames
+var turn = null; // each player has 2 turns each frame
+var currentPlayer;
+
+
+var loadingModal;
+var lodaingModalText;
+
+function initializeGame(playerData){
+    players = playerData;
+    turn = 0; // lets not count from 0 for it is too annoying!
+    currentPlayer = 0;
+    console.log('turn = ' + turn);
+    console.log("starting game, there are " + playerData.length + " players");
     gameplayMode(0);
 
+    setTurnDisplay(turn);
+    setPlayerDisplayName(players[currentPlayer].name);
+
+    loadingModal = document.getElementById('modals-container');
+    lodaingModalText = document.getElementById('modaltext');
 }
+
 // changes the turn to the param input
 function changeTurn(newTurn){
-    turn = newTurn;
+    if(newTurn){
+        turn = newTurn;
+    }
+    else {
+        turn++;
+    }
+    if(turn >= 2){
+        turn = 0;
+        changePlayer(++currentPlayer);
+    }
     console.log('it is turn:  ' +  turn);
+    // we also want to change it on the UI so we need to write a func in ui-functions
+    setTurnDisplay(turn);
+
+    changeModalText('bowling...');
+    resetPins();
+    resetPinsModal();
+}
+
+function changePlayer(playerindex){
+        if(playerindex >= players.length){
+            currentPlayer = 0;
+            frames--;
+        }
+        if(frames > 0){
+                setPlayerDisplayName(players[currentPlayer].name);
+    
+        }
+        else {
+            gameplayMode(10);
+        }
 }
 
 function gameplayMode(state) {
@@ -34,7 +80,17 @@ function gameplayMode(state) {
             y.classList.add("no-display"); // remove bowling ball
 
             // set gameplay on body
-            body.classList.remove('gameplay--on');
+            document.body.classList.remove('gameplay--on');
             break;
     }
+}
+
+function updateScore(addedpoints){
+    console.log('we should be updating score here');
+    // need to add the points for the currentPlayer score, keep that in the players object
+    
+    // we need to show the score card and update the active frame
+    console.log('need to show score on the receiver and waiting message on the sender');
+
+    // we also need to reset the ball / pins / let user know we are resetting a
 }

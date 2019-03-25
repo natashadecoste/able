@@ -28,9 +28,9 @@ $input-shadow: none;
 @import "../../node_modules/bulma/sass/elements/container.sass";
 @import "../../node_modules/bulma/sass/elements/form.sass";
 @import "../../node_modules/bulma/sass/elements/title.sass";
-@import "../../node_modules/bulma/sass/components/navbar.sass";
 @import "../../node_modules/bulma/sass/layout/hero.sass";
 @import "../../node_modules/bulma/sass/layout/section.sass";
+@import "../../node_modules/bulma/sass/components/modal.sass";
 ///////////////////////////////////////
 // GLOBAL CODE
 ///////////////////////////////////////
@@ -40,6 +40,11 @@ $input-shadow: none;
 
 .full-width {
     width: 100%;
+}
+
+// MODALZ CODE YAY
+#modals-container {
+    padding: 0 4em;
 }
 
 ///////////////////////////////////////
@@ -64,16 +69,12 @@ $input-shadow: none;
         left: -0.5em;
         font-family: "Nunito", Arial, Helvetica, sans-serif;
     }
-}
-
-///////////////////////////////////////
+} ///////////////////////////////////////
 // SENDER CODE 
 ///////////////////////////////////////
 .player-section {
     margin-bottom: 85px;
-}
-
-// styling the credits (for icons/etc)
+} // styling the credits (for icons/etc)
 .credits {
     font-size: 8px;
 }
@@ -106,7 +107,8 @@ $input-shadow: none;
     }
 }
 
-.game-status-bar, #cast-stop,
+.game-status-bar,
+#cast-stop,
 .gameplay-controls {
     display: none;
 }
@@ -165,8 +167,6 @@ $input-shadow: none;
     #cast-stop {
         display: block;
     }
-}
-
-///////////////////////////////////////
+} ///////////////////////////////////////
 // RECEIVER CODE
 ///////////////////////////////////////
