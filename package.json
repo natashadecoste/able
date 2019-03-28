@@ -8,7 +8,9 @@
     "scss": "node-sass --watch assets/scss -o assets/css",
     "scrub": "rm -rf node_modules && npm install",
     "serve": "npm run compile && http-server -c-1",
-    "compile": "uglifyjs js/sender/*.js --output logic.min.js",
+    "compile-sender": "uglifyjs js/sender/*.js --output logic.sender.min.js",
+    "compile-receiver": "uglifyjs js/receiver/*.js --output logic.receiver.min.js",
+    "compile": "npm run compile-sender && npm run compile-receiver",
     "start": "node-sass assets/scss -o assets/css && npm run serve"
   },
   "keywords": [

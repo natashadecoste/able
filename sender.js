@@ -24,7 +24,13 @@ function sessionListener(e) {
   con.log("New session ID:" + e.sessionId);
   session = e;
   session.addUpdateListener(sessionUpdateListener);
-  session.addMessageListener(namespace, receiverMessage);
+  session.addMessageListener(namespace, function (ns, message) {
+
+    con.log('message from receiver : ' + message);
+    createAlert("alert-message", message.message);
+
+
+  });
 }
 
 function receiverListener(e) {
