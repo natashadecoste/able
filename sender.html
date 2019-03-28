@@ -4,11 +4,10 @@
                         <meta name="viewport" content="width=device-width,
                                 initial-scale=1">
                         <meta charset="utf-8">
-                        <link rel="stylesheet" href="assets/css/styles.css">
+                        <link rel="stylesheet" href="assets/css/styles.css?v=0">
                         <script defer
                                 src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
-                                
-                                <title>DEMO</title>
+                        <title>DEMO</title>
 
                         <script
                                 src="https://www.gstatic.com/cv/js/sender/v1/cast_sender.js?loadCastFramework=1"></script>
@@ -44,8 +43,8 @@
                                 <div class="subtitle">
                                         add up to 5 players to the game.
                                 </div>
-                                <form id="players-container" class="container">
-                                </form>
+                                <div id="players-container" class="container">
+                                </div>
 
 
                         </div>
@@ -65,6 +64,8 @@
                                 class="button full-width is-primary
                                         is-large gameplay--off"
                                         onclick="startSession()">play
+                                        <!-- <img class="rocketicon"
+                                                src="assets/icons/start-up.svg"> -->
                                 </button>
                                 <button id="cast-stop" class="button
                                         full-width is-primary is-large"
@@ -73,19 +74,11 @@
 
                 </div>
         </section>
-        <div id="modals-container" class="modal">
-                <div class="modal-background"></div>
-                <div class="modal-card">
-                        <section class="modal-card-body">
-                                <div id="modaltext"></div>
-                        </section>
-                </div>
-        </div>
         <section onclick="sendMessage('testing')" class="section
                 gameplay-controls">
                 <div class="bowling-ball-wrapper">
                         <svg version="1.1" id="bowling-ball"
-                                style="fill: black"
+                                style="fill:#22e"
                                 alt="bowling ball to click"
                                 xmlns="http://www.w3.org/2000/svg"
                                 xmlns:xlink="http://www.w3.org/1999/xlink" x="0px"
@@ -117,7 +110,7 @@
                                 score: <div id="score-value">0</div>
                         </div>
                         <div class="turn">
-                                turn: <div id="turn-value">0</div>/2
+                                turn: <div id="turn-value">0</div>
                         </div>
                 </section>
 

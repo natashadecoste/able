@@ -46,9 +46,8 @@ function onInitSuccess(e) {
 }
 
 function onSessionSuccess() {
-  var playersArr = getPlayers();
   // init the game settings/button controls
-  initializeGame(playersArr);
+  initializeGame(playerCount);
 
 }
 
@@ -66,47 +65,36 @@ function initializeCastApi() {
 }
 
 function startSession() {
-  try {
-    chr.cast.initialize(apiConfig, onInitSuccess, onError);
+  // console.log("Button Play clicked");
+  // setTimeout(motion,1000);
 
-    var castContext = cast.framework.CastContext.getInstance();
-    //var castContext = new cast.framework.CastContext();
-    castContext.setOptions({
-      receiverApplicationId: "39FBD2DE"
-    });
-    castContext.requestSession(onSessionSuccess, onError);
+  // Uncomment the 2 lines above to test motion() (print max speed and acl.y to console)
+  // Uncomment the below section for proper Chromecasting
 
-    onSessionSuccess();
-  }
-  catch (err){
-    console.log("error: " + err);
-  }
+  chr.cast.initialize(apiConfig, onInitSuccess, onError);
+
+  var castContext = cast.framework.CastContext.getInstance();
+  // var castContext = new cast.framework.CastContext();
+  castContext.setOptions({
+    receiverApplicationId: "39FBD2DE"
+  });
+  castContext.requestSession(onSessionSuccess, onError);
+
+  onSessionSuccess();
+  // lets just start gameplay mode FOR NOW
 
 }
 
 function sendMessage(message) {
   var castSession = cast.framework.CastContext.getInstance().getCurrentSession();
-  castSession.sendMessage(namespace, { message: message });
-
-  //now we also want to change the turn
-  changeTurn();
+  castSession.sendMessage(namespace, { message: message }); 
 }
 
 function stopCasting() {
-  try {
-    var castSession = cast.framework.CastContext.getInstance().getCurrentSession();
-    castSession.endSession(true);
-  
-    gameplayMode(10);
+  var castSession = cast.framework.CastContext.getInstance().getCurrentSession();
+  castSession.endSession(true);
 
-
-
-  }  catch (err){
-    console.log("error: " + err);
-  }
-
-  location.reload();
- 
+  gameplayMode(10);
 }
 function addPlayer(){
   playerCount++;
@@ -118,26 +106,14 @@ window.onload = function() {
       initializeCastApi();
     }
   };
-  if ( true ) {
-  //   /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+  if (
+    /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
     con.log("mobile");
     initPlayerLobby();
     initCastControls();
 
   } else {
     con.log("Not a mobile device! Game will only work on a mobile, sorry");
-    createAlert("alert-message", "Sorry! You need a mobile device to play the game!");
+    createAlert("alert-message", "Sorry! Looks like you need a mobile device to play the game!");
   }
 };
-
-function getPlayers(){
-  var form = document.getElementById('players-container');
-  var n  = form.childElementCount;
-  var playersNames = [];
-
-  for(var i = 0; i< n; i++){
-    playersNames.push({name: form.children[i].children[1].value, score: 0})
-  }
-
-  return playersNames;
-}
