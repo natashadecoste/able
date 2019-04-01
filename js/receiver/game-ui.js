@@ -7,7 +7,7 @@ var ctx = canvas.getContext("2d");
 
 // for the stars
 var stars = [];
-var fps = 50;
+var fps = 140;
 var numStars = 2000;
 
 // for the pins
@@ -20,6 +20,10 @@ var laneDimensions = {
 
 // for the ball position
 var ballPos;
+var endLane = {x:canvas.width/2, y:canvas.height/3 -30}; // the position where the ball drops and dissappears
+var ballScale = 10;
+var speed = 1;
+var ballReset = false;
 
 initGameCanvas();
 
@@ -39,13 +43,13 @@ function initGameCanvas() {
   setInterval(animate, 1000 / fps);
 
   //init ball position
-  ballPos = {x: canvas.width/2, y: canvas.height/2}
+  ballPos = {x: canvas.width/2, y: canvas.height + 5}
 
   setTimeout(function() {
     deletePin(3);
-    console.log('timeout');
-    moveBall({x:canvas.width/2, y:canvas.height/3}, 3);
   }, 3000);
+
+  speed = 4;
 }
 
 // draws the lane for bowling
@@ -222,28 +226,38 @@ function deletePin(pinNum) {
   pins[pinNum].standing = false;
 }
 
-function drawBall(position) {
-  if(position) {
+function drawBall() {
+  if(!ballReset){
     ctx.beginPath();
-    ctx.arc(position.x, position.y, 50, 0, 2 * Math.PI);
-    ctx.fillStyle = "red";
-    ctx.fill();
-
-    ballPos = position;
-  }
-  else {
-    ctx.beginPath();
-    ctx.arc(ballPos.x, ballPos.y, 50, 0, 2 * Math.PI);
+    ctx.arc(ballPos.x, ballPos.y, 5*ballScale, 0, 2 * Math.PI);
     ctx.fillStyle = "green";
     ctx.fill();
   }
+  else {
+    setTimeout(function(){
+      ballReset = false;
+      ballPos = {x: canvas.width/2, y: canvas.height - 40};
+      ballScale = 10;
 
+
+    }, 800);
+  }
+    
 }
 
-function moveBall(endLoc, speed){
-  console.log('here');
-  while(ballPos.y != endLoc.y){
-    ballPos.y --;
+function moveBall(){
+  if(endLane){
+    if(ballPos.y >= endLane.y){
+      ballPos.y -= 3 * speed;
+      
+      ballScale -= 0.08;
+      if (ballScale <2){
+        ballScale = 2;
+      }
+    }
+    else {
+      ballReset = true;
+    }
   }
 }
 
@@ -262,5 +276,8 @@ function animate() {
   // draw the lane, pins and ball
   drawLane();
   drawPins();
+
+  // if ball needs to be moved
+  moveBall();
   drawBall();
 }
