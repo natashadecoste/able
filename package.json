@@ -1,0 +1,19 @@
+{
+    "name": "able-alley",
+    "version": "0.0.1",
+    "description": "Bowling Google Chromecast Simulation.",
+    "dependencies": {
+        "express": "^4.15.2",
+        "socket.io": "^2.2.0"
+    },
+    "scripts": {
+        "start": "node index.js",
+        "css-build": "node-sass --omit-source-map-url styles/styles.scss styles/generated.css",
+        "css-watch": "npm run css-build -- --watch",
+        "start-css": "npm run css-watch"
+    },
+    "devDependencies": {
+        "node-sass": "^4.11.0",
+        "bulma": "^0.7.4"
+    }
+}
