@@ -14,6 +14,7 @@ var rolling = false;
 var waitingToScore = false;
 var reset = false;
 var resetUIFisnih = true;
+var readyToRoll = true;
 
 var rollTime = 0;
 var scoreTime = 0;
@@ -130,10 +131,11 @@ $('document').ready(function () {
                 }
 
                 scoreTime += delta;
-                if (scoreTime > 10) {
+                if (scoreTime > 5) {
                     if (laneText != null) {scene.remove(laneText);}
                     scoreTime = 0;
                     reset = false;
+                    readyToRoll = true;
                 }
             }
         }
@@ -155,16 +157,20 @@ $('document').ready(function () {
             });
         }
 
-        function onDocumentMouseDown(event) {
+    /***
+     * For debug use only
+     * @param event
+     */
+    function onDocumentMouseDown(event) {
             switch ( event.button ) {
                 case 0: // left click to trigger movement
-                    rolling = true;
-                    moveWithRotate();
-                    break;
-                case 1: // middle
+                    triggerBallMovement();
+                    // rolling = true;
+                    // moveWithRotate();
                     break;
                 case 2: // right click to reset ball position
                     resetAll();
+                    readyToRoll = true;
                     break;
             }
 
@@ -227,6 +233,14 @@ $('document').ready(function () {
     
         scene.add(laneText);
     }
+
+        function triggerBallMovement() {
+            if (readyToRoll) {
+                rolling = true;
+                readyToRoll = false;
+                moveWithRotate();
+            }
+        }
 
 
         init();
