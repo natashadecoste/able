@@ -53,5 +53,6 @@ function submitPlayers() {
     var reading = getMeasurements();
     con.log("sender.js: reading.xspeed: ", reading.xspeed);
     con.log("sender.js: reading.yacc: ", reading.yacc);
+    socket.emit('getMeasurements', reading);
   }, 2000);
 }

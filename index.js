@@ -45,6 +45,11 @@ io.on('connection', function(socket){
         gameState.init = true;
         gameState.players = players;
     });
+
+    socket.on('getMeasurements', function(sensorData){
+        console.log("Read measurements from sensors");
+        console.log(sensorData)
+    });
 });
 
 
