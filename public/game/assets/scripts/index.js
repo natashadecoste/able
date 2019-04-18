@@ -165,12 +165,14 @@ $('document').ready(function () {
             switch ( event.button ) {
                 case 0: // left click to trigger movement
                     triggerBallMovement();
-                    // rolling = true;
-                    // moveWithRotate();
                     break;
                 case 2: // right click to reset ball position
                     resetAll();
                     readyToRoll = true;
+                    rolling = false;
+                    waitingToScore = false;
+                    resetUIFisnih = true;
+                    reset = false;
                     break;
             }
 
