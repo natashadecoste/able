@@ -1,3 +1,4 @@
+var socket = io();
 var scene;
 var ball;
 var font;
@@ -5,7 +6,6 @@ var laneText;
 var clock = new THREE.Clock();
 var speed = 30;
 var angle = 3;
-var score = 0;
 const ANGLEFACTOR = 2.3;
 const SPEEDFACTOR = 8;
 
@@ -121,6 +121,8 @@ $('document').ready(function () {
                 }
                 console.log("Points: " + points);
                 createScore();
+                console.log("Sending score to server...");
+                socket.emit('sendScore', points);
 
                 waitingToScore = false;
                 reset = true;

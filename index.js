@@ -17,7 +17,7 @@ app.use('/public', express.static(__dirname + '/public'));
 app.get('/view', function(req, res){
     console.log("a human has connected");
     // if someone connects from within alley
-    res.sendFile(__dirname + '/view' +'/index.html');
+    res.sendFile(__dirname + '/view' +'/index.php');
 });
 
 app.get('/styles/generated.css', function(req, res){
@@ -50,6 +50,10 @@ io.on('connection', function(socket){
         console.log("Read measurements from sensors");
         console.log(sensorData)
     });
+
+    socket.on("sendScore", function(score) {
+        console.log("Get score from view: " + score);
+    })
 });
 
 

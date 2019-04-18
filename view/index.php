@@ -11,7 +11,7 @@
 		    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/100/three.min.js"></script>
         <script src="https://cdn.rawgit.com/mrdoob/three.js/master/examples/js/loaders/GLTFLoader.js"></script>
 
-
+        <script src="/socket.io/socket.io.js"></script>
         <script src="../public/game/assets/scripts/physi.js"></script>
         <script src="../public/game/assets/scripts/ammo.js"></script>
         <script src="../public/game/assets/scripts/physijs_worker.js"></script>
