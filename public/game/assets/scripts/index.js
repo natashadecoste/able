@@ -1,6 +1,7 @@
 var scene;
 var ball;
 var font;
+var laneText;
 var clock = new THREE.Clock();
 var speed = 30;
 var angle = 3;
@@ -12,6 +13,7 @@ const SPEEDFACTOR = 8;
 var rolling = false;
 var waitingToScore = false;
 var reset = false;
+var resetUIFisnih = true;
 
 var rollTime = 0;
 var scoreTime = 0;
@@ -103,6 +105,7 @@ $('document').ready(function () {
                     rollTime = 0;
                     rolling = false;
                     waitingToScore = true;
+                    resetUIFisnih = false;
                     scoreTime = 0;
                 }
             } else if (waitingToScore) {
@@ -121,10 +124,14 @@ $('document').ready(function () {
                 waitingToScore = false;
                 reset = true;
             } else if (reset) {
-                resetAll();
+                if (!resetUIFisnih) {
+                    resetAll();
+                    resetUIFisnih = true;
+                }
+
                 scoreTime += delta;
                 if (scoreTime > 10) {
-                    scene.remove(laneText);
+                    if (laneText != null) {scene.remove(laneText);}
                     scoreTime = 0;
                     reset = false;
                 }
