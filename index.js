@@ -15,9 +15,9 @@ var gameState = {
 app.use('/public', express.static(__dirname + '/public'));
 
 app.get('/view', function(req, res){
-    console.log("a human has connected");
+    console.log("the view has connected");
     // if someone connects from within alley
-    res.sendFile(__dirname + '/view' +'/index.php');
+    res.sendFile(__dirname + '/view' +'/index.html');
 });
 
 app.get('/styles/generated.css', function(req, res){
