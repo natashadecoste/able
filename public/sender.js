@@ -47,4 +47,11 @@ function submitPlayers() {
 
   initializeGame(players);
   socket.emit('playerInitSuccess', players)
+
+  motion();
+  setTimeout(function(){
+    var reading = getMeasurements();
+    con.log("sender.js: reading.xspeed: ", reading.xspeed);
+    con.log("sender.js: reading.yacc: ", reading.yacc);
+  }, 2000);
 }
