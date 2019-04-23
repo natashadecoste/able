@@ -246,6 +246,14 @@ $('document').ready(function () {
             }
         }
 
+        socket.on('getMovement', function(data) {
+            console.log("Receive speed and angle...");
+            speed = data.xspeed;
+            angle = data.yacc;
+            console.log("xspeed: " + data.xspeed);
+            console.log("yacc: " + data.yacc);
+            triggerBallMovement();
+        });
 
         init();
         render();
