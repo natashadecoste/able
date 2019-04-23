@@ -50,7 +50,7 @@ io.on('connection', function(socket){
         console.log("Read measurements from sensors");
         console.log(sensorData)
         console.log("Now sending sensor data to view...");
-        socket.emit('getMovement', sensorData);
+        socket.broadcast.emit('getMovement', sensorData);
     });
 
     socket.on("sendScore", function(score) {

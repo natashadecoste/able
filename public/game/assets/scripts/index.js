@@ -40,6 +40,15 @@ $('document').ready(function () {
             initRenderer();
             controls = new THREE.OrbitControls( camera, renderer.domElement );
             document.body.appendChild(renderer.domElement);
+
+            socket.on('getMovement', function(data) {
+                console.log("Receive speed and angle...");
+                speed = data.xspeed;
+                angle = data.yacc;
+                console.log("xspeed: " + data.xspeed);
+                console.log("yacc: " + data.yacc);
+                triggerBallMovement();
+            });
         }
 
         function initBackground() {
@@ -246,16 +255,12 @@ $('document').ready(function () {
             }
         }
 
-        socket.on('getMovement', function(data) {
-            console.log("Receive speed and angle...");
-            speed = data.xspeed;
-            angle = data.yacc;
-            console.log("xspeed: " + data.xspeed);
-            console.log("yacc: " + data.yacc);
-            triggerBallMovement();
-        });
 
         init();
         render();
+        
         document.addEventListener( 'mousedown', onDocumentMouseDown, false );
+
 });
+
+
