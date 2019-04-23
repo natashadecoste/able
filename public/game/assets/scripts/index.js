@@ -4,8 +4,8 @@ var ball;
 var font;
 var laneText;
 var clock = new THREE.Clock();
-var speed = 30;
-var angle = 3;
+var speed = 40;
+var angle = 0;
 const ANGLEFACTOR = 1.5;
 const SPEEDFACTOR = 8;
 
@@ -128,6 +128,7 @@ $('document').ready(function () {
                         }
                     }
                 }
+                if (points == 10) { points += 2;}
                 console.log("Points: " + points);
                 createScore();
                 console.log("Sending score to server...");
@@ -230,7 +231,13 @@ $('document').ready(function () {
             opacity: 0.95,
             side: THREE.DoubleSide
         });
-        var message = "Score: " + points;
+        var message = ""; 
+        if (points == 12) {
+            message = "Strike: " + points + " !!!";
+        } else {
+            message = "Score: " + points;
+        }
+        
         var shapes = font.generateShapes(message, 30, 5);
         var geometry = new THREE.ShapeGeometry(shapes);
         geometry.computeBoundingBox();
