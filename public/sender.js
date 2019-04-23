@@ -35,6 +35,10 @@ window.onload = function() {
   }
 };
 
+socket.on('sendScoreBacktoController', function(score){
+  con.log("Score received on controller: " + score)
+});
+
 function submitPlayers() {
   // gets player names from the input
   var playernames = document.getElementsByClassName("player-ipt");
