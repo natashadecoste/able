@@ -6,7 +6,7 @@ var laneText;
 var clock = new THREE.Clock();
 var speed = 30;
 var angle = 3;
-const ANGLEFACTOR = 2.3;
+const ANGLEFACTOR = 1.5;
 const SPEEDFACTOR = 8;
 
 //game state
