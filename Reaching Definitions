@@ -1,0 +1,2 @@
+Mark-Compact Garbage Collection – 2
+• In a sweep phase, the new address of each object is calculated and stored it is forwarding field; the new address is the sum of the sizes of all objects encountered so far.

@@ -63,7 +63,7 @@ $('document').ready(function () {
 
         function initCamera() {
           camera = new THREE.PerspectiveCamera(45, WIDTH / HEIGHT, 1, 4000);
-          camera.position.set(-250, 100, 0);
+          camera.position.set(-320, 100, 0);
           camera.lookAt(0, 0, 0);
         }
 
