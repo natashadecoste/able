@@ -55,7 +55,7 @@ io.on('connection', function(socket){
 
     socket.on("sendScore", function(score) {
         console.log("Get score from view: " + score);
-        socket.broadcast.emit('sendScoreBacktoController', score);
+        socket.broadcast.emit('sendScoreBacktoGameplay', score);
     })
 });
 

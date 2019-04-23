@@ -1,6 +1,6 @@
 
 "use strict";
-
+var socket = io();
 
 var body = document.body;
 var players = [];
@@ -101,3 +101,8 @@ function updateScore(addedpoints){
 
     // we also need to reset the ball / pins / let user know we are resetting a
 }
+
+socket.on('sendScoreBacktoGameplay', function(score){
+    con.log("Score received in gamePlay: " + score)
+    // TODO, update the score on the controller 
+  });
