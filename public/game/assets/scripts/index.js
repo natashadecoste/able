@@ -17,12 +17,14 @@ var resetUIFisnih = true;
 var readyToRoll = true;
 var showTotalScore = false;
 var allowAddText = false;
+var showCongrat = false;
 
 var rollTime = 0;
 var scoreTime = 0;
 var totalScore = -1;
 var totalScoreTime = 0;
 var delta = 1;
+var winPlayer = "";
 
 $('document').ready(function () {
         var camera, renderer, controls, loader;
@@ -62,8 +64,9 @@ $('document').ready(function () {
 
             socket.on('gameOver', function(name) {
                 console.log("Receive game end message with player name...");
-                createScore("Congradulations, " + name + " won!\nRefresh to start new game", 10);
-                readyToRoll = false;
+                winPlayer = name;
+                showCongrat = true;
+                
             });
         }
 
@@ -193,9 +196,19 @@ $('document').ready(function () {
                         totalScore = -1;
                         totalScoreTime = 0;                    
                         readyToRoll = true;
+                        allowAddText = true;
                     }
                     
                 }
+            } else if (showCongrat){
+                console.log("showing congrat message");
+                if (allowAddText) {
+                    createScore("Congradulations, " + winPlayer + " won!\nRefresh to start new game", 10);
+                    allowAddText = false;
+                    readyToRoll = false;
+                    showCongrat = false;
+                }
+                
             }
         }
 
