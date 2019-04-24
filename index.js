@@ -58,10 +58,16 @@ io.on('connection', function(socket){
         console.log("Get score from view: " + score);
         gameState.players[gameState.currentPlayer].score += score;
         console.log(gameState);
-        gameState.currentPlayer = changeTurn();
+        socket.broadcast.emit('turnChange');
 
     })
+
+    socket.on("newplayerstate", function(gameStateRecv){
+        gameState.currentPlayer = gameStateRecv;
+    })
 });
+
+
 
 
 http.listen(3000, function(){

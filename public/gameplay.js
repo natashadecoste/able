@@ -54,7 +54,7 @@ function changeTurn(newTurn){
     resetPins();
     resetPinsModal();
 
-    return currentPlayer;
+    socket.emit('newplayerstate', currentPlayer)
 }
 
 function changePlayer(playerindex){
@@ -108,3 +108,5 @@ function updateScore(addedpoints){
 //     con.log("Score received in gamePlay: " + score)
 //     // TODO, update the score on the controller 
 //   });
+
+socket.on('turnChange', changeTurn())
