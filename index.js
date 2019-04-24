@@ -63,6 +63,10 @@ io.on('connection', function(socket){
     })
 
     socket.on("newplayerstate", function(gameStateRecv){
+        if( gameState.currentPlayer != gameStateRecv) {
+            socket.broadcast.emit('totalScore', gameState.players[gameState.currentPlayer].score)
+        }
+        
         gameState.currentPlayer = gameStateRecv;
     })
 });
