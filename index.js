@@ -58,6 +58,7 @@ io.on('connection', function(socket){
         console.log("Get score from view: " + score);
         gameState.players[gameState.currentPlayer].score += score;
         console.log(gameState);
+        gameState.currentPlayer = changeTurn();
 
     })
 });

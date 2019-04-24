@@ -53,6 +53,8 @@ function changeTurn(newTurn){
     changeModalText('bowling...');
     resetPins();
     resetPinsModal();
+
+    return currentPlayer;
 }
 
 function changePlayer(playerindex){
