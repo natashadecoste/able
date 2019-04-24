@@ -178,7 +178,10 @@ $('document').ready(function () {
                     readyToRoll = !showTotalScore;
                 }
             } else if (showTotalScore) {
-                createScore("Total score: " + totalScore, 30);
+                if (laneText == null) {
+                    createScore("Total score: " + totalScore, 30);
+                }
+                
                 totalScoreTime += delta;
                 if (totalScoreTime > 5) {
                     if (laneText != null) {
