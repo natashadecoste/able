@@ -53,8 +53,14 @@ $('document').ready(function () {
 
             socket.on('totalScore', function(score) {
                 console.log("Receive total score...");
-                createScore("Total score: " + score);
+                createScore("Total score: " + score, 30);
                 showTotalScore = true;
+                readyToRoll = false;
+            });
+
+            socket.on('gameOver', function(name) {
+                console.log("Receive game end message with player name...");
+                createScore("Congradulations, " + name + " won!\nRefresh to start new game", 10);
                 readyToRoll = false;
             });
         }
@@ -146,7 +152,7 @@ $('document').ready(function () {
                 console.log("Points: " + points);
                 
                 
-                createScore(message);
+                createScore(message, 30);
                 console.log("Sending score to server...");
                 socket.emit('sendScore', points);
 
@@ -245,7 +251,7 @@ $('document').ready(function () {
         return ball;
     }
 
-    function createScore(message) {
+    function createScore(message, zoom) {
         var xMid;
         var textShape = new THREE.BufferGeometry();
         var color = 0xFFFFFF;
@@ -256,7 +262,7 @@ $('document').ready(function () {
             side: THREE.DoubleSide
         });
         
-        var shapes = font.generateShapes(message, 30, 5);
+        var shapes = font.generateShapes(message, zoom);
         var geometry = new THREE.ShapeGeometry(shapes);
         geometry.computeBoundingBox();
     
