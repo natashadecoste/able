@@ -15,11 +15,12 @@ var waitingToScore = false;
 var reset = false;
 var resetUIFisnih = true;
 var readyToRoll = true;
+var showTotalScore = false;
 
 var rollTime = 0;
 var scoreTime = 0;
+var totalScoreTime = 0;
 var delta = 1;
-
 
 $('document').ready(function () {
         var camera, renderer, controls, loader;
@@ -48,6 +49,13 @@ $('document').ready(function () {
                 console.log("xspeed: " + data.xspeed);
                 console.log("yacc: " + data.yacc);
                 triggerBallMovement();
+            });
+
+            socket.on('totalScore', function(score) {
+                console.log("Receive total score...");
+                createScore("Total score: " + score);
+                showTotalScore = true;
+                readyToRoll = false;
             });
         }
 
@@ -128,9 +136,17 @@ $('document').ready(function () {
                         }
                     }
                 }
-                if (points == 10) { points += 2;}
+                var message = "Score: ";
+                if (points == 10) { 
+                    points += 2;
+                    message = message + points + " !!!";
+                } else {
+                    message = message + points;
+                }
                 console.log("Points: " + points);
-                createScore();
+                
+                
+                createScore(message);
                 console.log("Sending score to server...");
                 socket.emit('sendScore', points);
 
@@ -146,6 +162,14 @@ $('document').ready(function () {
                 if (scoreTime > 5) {
                     if (laneText != null) {scene.remove(laneText);}
                     scoreTime = 0;
+                    reset = false;
+                    readyToRoll = true;
+                }
+            } else if (showTotalScore) {
+                totalScoreTime += delta;
+                if (totalScoreTime > 5) {
+                    if (laneText != null) {scene.remove(laneText);}
+                    totalScoreTime = 0;
                     reset = false;
                     readyToRoll = true;
                 }
@@ -221,7 +245,7 @@ $('document').ready(function () {
         return ball;
     }
 
-    function createScore() {
+    function createScore(message) {
         var xMid;
         var textShape = new THREE.BufferGeometry();
         var color = 0xFFFFFF;
@@ -231,12 +255,6 @@ $('document').ready(function () {
             opacity: 0.95,
             side: THREE.DoubleSide
         });
-        var message = ""; 
-        if (points == 12) {
-            message = "Strike: " + points + " !!!";
-        } else {
-            message = "Score: " + points;
-        }
         
         var shapes = font.generateShapes(message, 30, 5);
         var geometry = new THREE.ShapeGeometry(shapes);
