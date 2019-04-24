@@ -16,6 +16,7 @@ var reset = false;
 var resetUIFisnih = true;
 var readyToRoll = true;
 var showTotalScore = false;
+var allowAddText = false;
 
 var rollTime = 0;
 var scoreTime = 0;
@@ -171,6 +172,7 @@ $('document').ready(function () {
                         scene.remove(laneText);
                         if (totalScore > -1){
                             showTotalScore = true;
+                            allowAddText = true;
                         }
                     }
                     scoreTime = 0;
@@ -178,8 +180,9 @@ $('document').ready(function () {
                     readyToRoll = !showTotalScore;
                 }
             } else if (showTotalScore) {
-                if (laneText == null) {
+                if (allowAddText) {
                     createScore("Total score: " + totalScore, 30);
+                    allowAddText = false;
                 }
                 
                 totalScoreTime += delta;
