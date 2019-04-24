@@ -55,8 +55,16 @@ io.on('connection', function(socket){
     });
 
     socket.on('gameOver', function(){
+        var winner = 0;
+        for(var i = 1; i< gameState.players.length; i++){
+            if(gameState.players[i].score > gameState.players[winner].score ){
+                winner = i;
+            }
 
+
+        }
         console.log('game is over');
+        socket.broadcast.emit('endGame', gameState.players[winner].name);
     });
 
     socket.on("sendScore", function(score) {
