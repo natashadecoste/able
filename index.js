@@ -44,6 +44,7 @@ io.on('connection', function(socket){
         console.log(players);
         gameState.init = true;
         gameState.players = players;
+        gameState.currentPlayer = 0;
     });
 
     socket.on('getMeasurements', function(sensorData){
@@ -55,7 +56,9 @@ io.on('connection', function(socket){
 
     socket.on("sendScore", function(score) {
         console.log("Get score from view: " + score);
-        socket.broadcast.emit('sendScoreBacktoGameplay', score);
+        gameState.players[gameState.currentPlayer].score += score;
+        console.log(gameState);
+
     })
 });
 
