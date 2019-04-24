@@ -50,6 +50,11 @@ function submitPlayers() {
   initializeGame(players);
   socket.emit('playerInitSuccess', players)
 
+
+}
+
+function startRolling(){
+  con.log("Rolling Triggered.")
   motion();
   setTimeout(function(){
     var reading = getMeasurements();

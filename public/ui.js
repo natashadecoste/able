@@ -90,6 +90,7 @@ function setPlayerDisplayName(playerid){
 }
 
 function setTurnDisplay(turn){
+  console.log("turn: " + turn);
   document.getElementById('turn-value').innerHTML = turn+1;
 }
 
@@ -109,6 +110,6 @@ function toggleOffModal(){
 }
 
 function changeModalText(newText){
-  lodaingModalText.innerHTML = newText;
+  loadingModalText.innerHTML = newText;
 
 }

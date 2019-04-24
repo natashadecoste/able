@@ -7,7 +7,7 @@ var clock = new THREE.Clock();
 var speed = 40;
 var angle = 0;
 const ANGLEFACTOR = 1.5;
-const SPEEDFACTOR = 8;
+const SPEEDFACTOR = 10;
 
 //game state
 var rolling = false;

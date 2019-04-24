@@ -5,7 +5,7 @@ var socket = io();
 var body = document.body;
 var players = [];
 var frames = 10; // each player bowls 10 frames
-var turn = null; // each player has 2 turns each frame
+var turn = 0; // each player has 2 turns each frame
 var currentPlayer;
 
 
@@ -51,8 +51,9 @@ function changeTurn(newTurn){
     setTurnDisplay(turn);
 
     changeModalText('bowling...');
-    resetPins();
+    // resetPins();
     resetPinsModal();
+    console.log('the current is ' + currentPlayer)
 
     socket.emit('newplayerstate', currentPlayer)
 }
@@ -109,4 +110,5 @@ function updateScore(addedpoints){
 //     // TODO, update the score on the controller 
 //   });
 
-socket.on('turnChange', changeTurn())
+socket.on('turnChange', function(){
+    changeTurn()});
