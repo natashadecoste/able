@@ -70,7 +70,7 @@ function changePlayer(playerindex){
         }
         else {
             gameplayMode(10);
-            socket.broadcast.emit('gameOver', playername);
+            socket.broadcast.emit('gameOver');
         }
 }
 

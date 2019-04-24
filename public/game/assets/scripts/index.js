@@ -62,7 +62,7 @@ $('document').ready(function () {
                 //readyToRoll = false;
             });
 
-            socket.on('gameOver', function(name) {
+            socket.on('endGame', function(name) {
                 console.log("Receive game end message with player name...");
                 winPlayer = name;
                 showCongrat = true;
