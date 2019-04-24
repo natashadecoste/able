@@ -19,6 +19,7 @@ var showTotalScore = false;
 
 var rollTime = 0;
 var scoreTime = 0;
+var totalScore = -1;
 var totalScoreTime = 0;
 var delta = 1;
 
@@ -53,9 +54,9 @@ $('document').ready(function () {
 
             socket.on('totalScore', function(score) {
                 console.log("Receive total score...");
-                createScore("Total score: " + score, 30);
-                showTotalScore = true;
-                readyToRoll = false;
+                totalScore = score;
+                //showTotalScore = true;
+                //readyToRoll = false;
             });
 
             socket.on('gameOver', function(name) {
@@ -166,17 +167,27 @@ $('document').ready(function () {
 
                 scoreTime += delta;
                 if (scoreTime > 5) {
-                    if (laneText != null) {scene.remove(laneText);}
+                    if (laneText != null) {
+                        scene.remove(laneText);
+                        if (totalScore > -1){
+                            showTotalScore = true;
+                        }
+                    }
                     scoreTime = 0;
                     reset = false;
-                    readyToRoll = true;
+                    readyToRoll = !showTotalScore;
                 }
             } else if (showTotalScore) {
+                createScore("Total score: " + score, 30);
                 totalScoreTime += delta;
                 if (totalScoreTime > 5) {
-                    if (laneText != null) {scene.remove(laneText);}
+                    if (laneText != null) {
+                        scene.remove(laneText);
+                        
+                    }
+                    totalScore = -1;
                     totalScoreTime = 0;
-                    reset = false;
+                    showTotalScore = false;
                     readyToRoll = true;
                 }
             }
