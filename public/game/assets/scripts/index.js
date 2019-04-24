@@ -16,11 +16,15 @@ var reset = false;
 var resetUIFisnih = true;
 var readyToRoll = true;
 var showTotalScore = false;
+var allowAddText = false;
+var showCongrat = false;
 
 var rollTime = 0;
 var scoreTime = 0;
+var totalScore = -1;
 var totalScoreTime = 0;
 var delta = 1;
+var winPlayer = "";
 
 $('document').ready(function () {
         var camera, renderer, controls, loader;
@@ -53,15 +57,16 @@ $('document').ready(function () {
 
             socket.on('totalScore', function(score) {
                 console.log("Receive total score...");
-                createScore("Total score: " + score, 30);
-                showTotalScore = true;
-                readyToRoll = false;
+                totalScore = score;
+                //showTotalScore = true;
+                //readyToRoll = false;
             });
 
             socket.on('gameOver', function(name) {
                 console.log("Receive game end message with player name...");
-                createScore("Congradulations, " + name + " won!\nRefresh to start new game", 10);
-                readyToRoll = false;
+                winPlayer = name;
+                showCongrat = true;
+                
             });
         }
 
@@ -166,19 +171,44 @@ $('document').ready(function () {
 
                 scoreTime += delta;
                 if (scoreTime > 5) {
-                    if (laneText != null) {scene.remove(laneText);}
+                    if (laneText != null) {
+                        scene.remove(laneText);
+                        if (totalScore > -1){
+                            showTotalScore = true;
+                            allowAddText = true;
+                        }
+                    }
                     scoreTime = 0;
                     reset = false;
-                    readyToRoll = true;
+                    readyToRoll = !showTotalScore;
                 }
             } else if (showTotalScore) {
+                if (allowAddText) {
+                    createScore("Total score: " + totalScore, 30);
+                    allowAddText = false;
+                }
+                
                 totalScoreTime += delta;
                 if (totalScoreTime > 5) {
-                    if (laneText != null) {scene.remove(laneText);}
-                    totalScoreTime = 0;
-                    reset = false;
-                    readyToRoll = true;
+                    if (laneText != null) {
+                        scene.remove(laneText);
+                        showTotalScore = false;
+                        totalScore = -1;
+                        totalScoreTime = 0;                    
+                        readyToRoll = true;
+                        allowAddText = true;
+                    }
+                    
                 }
+            } else if (showCongrat){
+                console.log("showing congrat message");
+                if (allowAddText) {
+                    createScore("Congradulations, " + winPlayer + " won!\nRefresh to start new game", 10);
+                    allowAddText = false;
+                    readyToRoll = false;
+                    showCongrat = false;
+                }
+                
             }
         }
 
