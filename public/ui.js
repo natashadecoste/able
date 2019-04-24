@@ -90,10 +90,13 @@ function setPlayerDisplayName(playerid){
 }
 
 function setTurnDisplay(turn){
-  console.log("turn: " + turn);
   document.getElementById('turn-value').innerHTML = turn+1;
 }
 
+
+function setScoreDisplay(score){
+  document.getElementById('score-value').innerHTML = score;
+}
 
 function resetPinsModal(){
   loadingModal.classList.add('is-active');

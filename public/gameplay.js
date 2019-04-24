@@ -28,6 +28,7 @@ function initializeGame(playerData){
 
     // sets the current turn
     setTurnDisplay(turn);
+    setScoreDisplay(players[currentPlayer].score)
     setPlayerDisplayName(players[currentPlayer].name);
 
     loadingModal = document.getElementById('modals-container');
@@ -50,8 +51,8 @@ function changeTurn(newTurn){
     // we also want to change it on the UI so we need to write a func in ui-functions
     setTurnDisplay(turn);
 
+
     changeModalText('bowling...');
-    // resetPins();
     resetPinsModal();
     console.log('the current is ' + currentPlayer)
 
@@ -110,5 +111,7 @@ function updateScore(addedpoints){
 //     // TODO, update the score on the controller 
 //   });
 
-socket.on('turnChange', function(){
-    changeTurn()});
+socket.on('turnChange', function(score){
+    changeTurn();
+    setScoreDisplay(score);
+});

@@ -58,7 +58,7 @@ io.on('connection', function(socket){
         console.log("Get score from view: " + score);
         gameState.players[gameState.currentPlayer].score += score;
         console.log(gameState);
-        socket.broadcast.emit('turnChange');
+        socket.broadcast.emit('turnChange', score);
 
     })
 
@@ -66,7 +66,7 @@ io.on('connection', function(socket){
         if( gameState.currentPlayer != gameStateRecv) {
             socket.broadcast.emit('totalScore', gameState.players[gameState.currentPlayer].score)
         }
-        
+
         gameState.currentPlayer = gameStateRecv;
     })
 });
