@@ -4,7 +4,7 @@ var socket = io();
 
 var body = document.body;
 var players = [];
-var frames = 10; // each player bowls 10 frames
+var frames = 1; // each player bowls this many "frames" or times usually it is 10
 var turn = 0; // each player has 2 turns each frame
 var currentPlayer;
 
@@ -70,6 +70,7 @@ function changePlayer(playerindex){
         }
         else {
             gameplayMode(10);
+            socket.emit('gameOver', playername);
         }
 }
 
