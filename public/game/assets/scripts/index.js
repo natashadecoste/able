@@ -178,17 +178,17 @@ $('document').ready(function () {
                     readyToRoll = !showTotalScore;
                 }
             } else if (showTotalScore) {
-                createScore("Total score: " + score, 30);
+                createScore("Total score: " + totalScore, 30);
                 totalScoreTime += delta;
                 if (totalScoreTime > 5) {
                     if (laneText != null) {
                         scene.remove(laneText);
-                        
+                        showTotalScore = false;
+                        totalScore = -1;
+                        totalScoreTime = 0;                    
+                        readyToRoll = true;
                     }
-                    totalScore = -1;
-                    totalScoreTime = 0;
-                    showTotalScore = false;
-                    readyToRoll = true;
+                    
                 }
             }
         }
